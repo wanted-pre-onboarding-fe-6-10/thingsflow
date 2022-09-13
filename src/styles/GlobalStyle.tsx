@@ -4,7 +4,6 @@
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 
-// [질문] - type 지정 이렇게 맞는지?
 interface Theme {
   ownColor: string;
   ownColorHover: string;
@@ -17,11 +16,8 @@ interface Theme {
   subBoxColor2: string;
 }
 
-interface RootObject {
-  theme: Theme;
-}
-
-const GlobalStyle = createGlobalStyle`
+// [질문clear] - styled-component의 propd은 이렇게 <{}>제네릭으로 지정할 수 있음
+const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
 ${reset}
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
@@ -55,10 +51,8 @@ table {
 }
 body {
   font-family: 'Noto Sans KR', sans-serif;
-  background-color: ${(props: RootObject) => {
-    return props.theme.bgColor;
-  }};
-  color: ${(props: RootObject) => props.theme.textColor};
+  background-color: ${props => props.theme.bgColor};
+  color: ${props => props.theme.textColor};
   line-height: 1.2;
 }
 a {

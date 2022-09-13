@@ -36,7 +36,7 @@ interface PullRequest {
   html_url: string;
   diff_url: string;
   patch_url: string;
-  merged_at?: any;
+  merged_at?: unknown;
 }
 
 interface Reactions {
@@ -52,7 +52,7 @@ interface Reactions {
   eyes: number;
 }
 
-interface IssueList {
+export interface IssueList {
   url: string;
   repository_url: string;
   labels_url: string;
@@ -67,32 +67,32 @@ interface IssueList {
   labels: Label[];
   state: string;
   locked: boolean;
-  assignee?: any;
-  assignees: any[];
-  milestone?: any;
+  assignee?: unknown;
+  assignees: unknown[];
+  milestone?: unknown;
   comments: number;
   created_at: Date;
   updated_at: Date;
-  closed_at?: any;
+  closed_at?: unknown;
   author_association: string;
-  active_lock_reason?: any;
+  active_lock_reason?: unknown;
   draft: boolean;
   pull_request: PullRequest;
   body: string;
   reactions: Reactions;
   timeline_url: string;
-  performed_via_github_app?: any;
-  state_reason?: any;
+  performed_via_github_app?: unknown;
+  state_reason?: unknown;
 }
 
 interface IssueListType {
-  IssueListData: IssueList[];
-  setIssueListData: Dispatch<SetStateAction<never[]>>; // 맞는지? [질문]-context에서 type 지정하는법 질문
+  issueListData: IssueList[];
+  setIssueListData: Dispatch<SetStateAction<IssueList[]>>;
+  // [질문clear] IssueList[]를 받는 setState함수의 type임
 }
 
 const AppContext = React.createContext<IssueListType>({
-  IssueListData: [],
-  // [질문]type
+  issueListData: [],
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   setIssueListData: () => {},
 });

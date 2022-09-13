@@ -2,16 +2,18 @@ import Detail from 'pages/Detail/Detail';
 import Error from 'pages/Error/Error';
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import AppContext from './AppContext';
+import AppContext, { IssueList } from './AppContext';
 import Issue from './pages/Issue/Issue';
+import Header from './components/Header';
 
 const Router = () => {
-  const [IssueListData, setIssueListData] = useState([]);
+  // [질문clear] -type?
+  const [issueListData, setIssueListData] = useState<IssueList[]>([]);
 
   return (
-    // [질문] -type?
-    <AppContext.Provider value={{ IssueListData, setIssueListData }}>
+    <AppContext.Provider value={{ issueListData, setIssueListData }}>
       <BrowserRouter>
+        <Header />
         <Routes>
           <Route path="/" element={<Issue />} />
           <Route path="/:number" element={<Detail />} />
