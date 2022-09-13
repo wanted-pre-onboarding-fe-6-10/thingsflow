@@ -41,7 +41,9 @@ const Issue = () => {
       <ul>
         {state.data?.map((v, i) => (
           <div key={i}>
+            <li>{v.number}</li>
             <li>{v.title}</li>
+            <li>{v.user.id}</li>
             <li>{v.comments}</li>
             <button onClick={() => getIssue(v.number)}>click</button>
           </div>
