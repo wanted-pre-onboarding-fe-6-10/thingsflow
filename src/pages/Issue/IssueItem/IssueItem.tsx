@@ -80,7 +80,8 @@ const IssueItem = () => {
               <div>
                 <Title>{data.title}</Title>
                 <p>
-                  작성자 {data.user.login} , 작성일 {`${data.created_at}`}
+                  <span>작성자 : {data.user.login} , </span>
+                  <span> 작성일 : {new Date(data.created_at).toLocaleString()}</span>
                 </p>
               </div>
 
