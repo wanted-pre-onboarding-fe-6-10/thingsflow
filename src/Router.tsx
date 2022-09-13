@@ -2,13 +2,13 @@ import Detail from 'pages/Detail/Detail';
 import Error from 'pages/Error/Error';
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import AppContext, { IssueList } from './AppContext';
+import AppContext, { IssueDataType } from './AppContext';
 import Issue from './pages/Issue/Issue';
 import Header from './components/Header';
 
 const Router = () => {
   // [질문clear] -type?
-  const [issueListData, setIssueListData] = useState<IssueList[]>([]);
+  const [issueListData, setIssueListData] = useState<IssueDataType[]>([]);
 
   return (
     <AppContext.Provider value={{ issueListData, setIssueListData }}>
