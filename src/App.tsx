@@ -1,5 +1,15 @@
+import { ThemeProvider } from 'styled-components';
+import { lightTheme } from 'styles/theme';
+import GlobalStyle from 'styles/GlobalStyle';
+import Router from './Router';
+
 function App() {
-  return <>App.tsx</>;
+  return (
+    <ThemeProvider theme={lightTheme}>
+      <GlobalStyle />
+      <Router />
+    </ThemeProvider>
+  );
 }
 
 export default App;
