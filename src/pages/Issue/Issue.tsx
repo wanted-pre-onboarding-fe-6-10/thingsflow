@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { IssueDataType } from '../../AppContext';
 import AppContext from '../../AppContext';
 import IssueItem from './IssueItem/IssueItem';
@@ -10,15 +10,16 @@ const Issue = () => {
   const API_KEY = process.env.REACT_APP_ACCESS_TOKEN;
 
   const appContext = useContext(AppContext);
-  const { isLoading, setIsLoading } = appContext;
+
+  const [isLoading, setIsLoading] = useState(true);
 
   const getRequest = async () => {
     const response = await axios({ url: BASE_URL, headers: { Authorization: `${API_KEY}` } });
 
     if (response.status === 200) {
-      setInterval(() => {
+      setTimeout(() => {
         setIsLoading(false);
-      }, 1000);
+      }, 500);
 
       const openData = response.data.filter((data: IssueDataType) => data.state === 'open');
 

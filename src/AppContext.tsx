@@ -120,15 +120,11 @@ export interface IssueDataType {
 interface IssueListType {
   issueListData: IssueDataType[];
   setIssueListData: Dispatch<SetStateAction<IssueDataType[]>>;
-  isLoading: boolean;
-  setIsLoading: Dispatch<SetStateAction<boolean>>;
 }
 
 const AppContext = React.createContext<IssueListType>({
   issueListData: [],
   setIssueListData: () => {},
-  isLoading: true,
-  setIsLoading: () => {},
 });
 
 export default AppContext;

@@ -7,10 +7,9 @@ import Router from './Router';
 
 function App() {
   const [issueListData, setIssueListData] = useState<IssueDataType[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   return (
-    <AppContext.Provider value={{ issueListData, setIssueListData, isLoading, setIsLoading }}>
+    <AppContext.Provider value={{ issueListData, setIssueListData }}>
       <ThemeProvider theme={lightTheme}>
         <GlobalStyle />
         <Router />
