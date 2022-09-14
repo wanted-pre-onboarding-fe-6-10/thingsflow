@@ -2,7 +2,12 @@ import instance from './axios';
 
 const COMMOM = process.env.REACT_APP_BASE_URL;
 
-type QueryType = any;
+type QueryType = {
+  page: number | string;
+  per_page: number | string;
+  state: string;
+  sort: string;
+};
 
 export const getIssueList = async (obj: QueryType) => {
   let query = '';

@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import '../../node_modules/github-markdown-css/github-markdown.css';
 

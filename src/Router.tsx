@@ -11,7 +11,7 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<Issue />} />
         <Route path="/:number" element={<Detail />} />
-        <Route path="/error" element={<Error />} />
+        {/* [TODO] <Route path="/error" element={<Error />} /> */}
       </Routes>
     </BrowserRouter>
   );
