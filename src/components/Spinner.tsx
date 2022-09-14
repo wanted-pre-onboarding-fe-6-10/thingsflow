@@ -4,24 +4,18 @@ const Spinner = () => {
   return <SpinnerDots />;
 };
 
-const SpinnerWrapper = styled.div`
-  position: absolute;
-  left: 400px;
-  width: fit-content;
-  align-self: center;
-`;
-
 const SpinnerDots = styled.div`
   position: relative;
   width: 10px;
   height: 10px;
   border-radius: 5px;
-  background-color: #9880ff;
-  color: #9880ff;
+  background-color: ${props => props.theme.ownColor};
+  color: ${props => props.theme.ownColor};
   -webkit-animation: dot-flashing 1s infinite linear alternate;
   animation: dot-flashing 1s infinite linear alternate;
   -webkit-animation-delay: 0.5s;
   animation-delay: 0.5s;
+  margin-top: 1rem;
 
   ::before,
   ::after {
@@ -35,8 +29,8 @@ const SpinnerDots = styled.div`
     width: 10px;
     height: 10px;
     border-radius: 5px;
-    background-color: #9880ff;
-    color: #9880ff;
+    background-color: ${props => props.theme.ownColor};
+    color: ${props => props.theme.ownColor};
     -webkit-animation: dot-flashing 1s infinite alternate;
     animation: dot-flashing 1s infinite alternate;
     -webkit-animation-delay: 0s;
@@ -47,8 +41,8 @@ const SpinnerDots = styled.div`
     width: 10px;
     height: 10px;
     border-radius: 5px;
-    background-color: #9880ff;
-    color: #9880ff;
+    background-color: ${props => props.theme.ownColor};
+    color: ${props => props.theme.ownColor};
     -webkit-animation: dot-flashing 1s infinite alternate;
     animation: dot-flashing 1s infinite alternate;
     -webkit-animation-delay: 1s;
@@ -57,21 +51,21 @@ const SpinnerDots = styled.div`
 
   @-webkit-keyframes dot-flashing {
     0% {
-      background-color: #9880ff;
+      background-color: ${props => props.theme.ownColor};
     }
     50%,
     100% {
-      background-color: rgba(152, 128, 255, 0.2);
+      background-color: rgba(255, 188, 32, 0.2);
     }
   }
 
   @keyframes dot-flashing {
     0% {
-      background-color: #9880ff;
+      background-color: ${props => props.theme.ownColor};
     }
     50%,
     100% {
-      background-color: rgba(152, 128, 255, 0.2);
+      background-color: rgba(255, 188, 32, 0.2);
     }
   }
 `;

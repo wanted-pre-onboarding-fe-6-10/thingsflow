@@ -1,5 +1,4 @@
 import { AxiosInstance } from 'axios';
-import instance from './axios.development';
 
 class IssueService {
   httpClient: AxiosInstance;
@@ -14,17 +13,24 @@ class IssueService {
     this.targetRepository = targetRepository;
   }
 
-  getIssues(page: number) {
+  getAllIssues = (page: number) => {
     const response = this.httpClient.get(
       this.targetRepository + `/issues?per_page=20&page=${page}`
     );
     return response;
-  }
+  };
 
-  getIssueDetail(number: number) {
+  getOpenIssues = (page: number) => {
+    const response = this.httpClient.get(
+      this.targetRepository + `/issues?sort=comments&state=open&per_page=20&page=${page}`
+    );
+    return response;
+  };
+
+  getIssueDetail = (number: number) => {
     const response = this.httpClient.get(this.targetRepository + `/issues/${number}`);
     return response;
-  }
+  };
 }
 
 export default IssueService;

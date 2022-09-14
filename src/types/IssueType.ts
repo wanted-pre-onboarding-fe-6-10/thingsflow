@@ -7,7 +7,7 @@ type IssueType = {
   html_url: string;
   id: string;
   node_id: string;
-  number: string;
+  number: number;
   title: string;
   user: UserType;
   labels: string;
