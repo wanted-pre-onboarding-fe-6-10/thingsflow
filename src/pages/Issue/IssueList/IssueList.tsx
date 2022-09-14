@@ -14,7 +14,7 @@ const IssueList = ({ index, list }: Props) => {
   useEffect(() => {
     const res = detailDate(list.created_at);
     setDate(res);
-  }, []);
+  }, [list.created_at]);
 
   return (
     <>
@@ -50,49 +50,49 @@ const IssueList = ({ index, list }: Props) => {
   );
 };
 
-const ListItemBox = styled.div`
+export const ListItemBox = styled.div`
   padding: 0.5rem 1.2rem;
   margin-top: 0.5rem;
 `;
-const ListItemWrapper = styled.ul`
+export const ListItemWrapper = styled.ul`
   border-radius: 0.5rem;
   padding: 0.5rem;
   background-color: ${props => props.theme.boxColor};
   display: flex;
   align-items: center;
 `;
-const ListItem = styled.div`
+export const ListItem = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
 `;
-const ListTitleWrapper = styled.div`
+export const ListTitleWrapper = styled.div`
   width: 70%;
   margin-right: 1rem;
 `;
-const ListNumberWrapper = styled.div`
+export const ListNumberWrapper = styled.div`
   width: 30%;
 `;
-const ListImgWrapper = styled.div`
+export const ListImgWrapper = styled.div`
   background-color: ${props => props.theme.subBoxColor};
   margin-right: 1rem;
 `;
-const ListImg = styled.img`
+export const ListImg = styled.img`
   width: 5rem;
   height: 5rem;
   border-radius: 50%;
   margin: 0.5rem;
 `;
-const ListNumber = styled.li``;
-const ListTitle = styled.li`
+export const ListNumber = styled.li``;
+export const ListTitle = styled.li`
   font-weight: bold;
   margin-bottom: 0.5rem;
 `;
-const ListID = styled.li``;
-const ListComments = styled.li`
+export const ListID = styled.li``;
+export const ListComments = styled.li`
   margin-bottom: 0.5rem;
 `;
-const ListCreatedAt = styled.li``;
+export const ListCreatedAt = styled.li``;
 const AdvertisingBox = styled.div`
   height: 200px;
   display: flex;

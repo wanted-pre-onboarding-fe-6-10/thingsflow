@@ -1,13 +1,15 @@
 import { issueAxios } from 'api/getIssue';
+import { Container } from 'pages/Issue/Issue';
 import { useIssueDispatch, useIssueState } from 'pages/IssuesContext';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import styled from 'styled-components';
+import DetailItem from './Detailitem/DetailItem';
 
 const Detail = () => {
   const params = useParams();
   const state = useIssueState();
   const dispatch = useIssueDispatch();
-
   const getDetail = async () => {
     try {
       dispatch({ type: 'GET_ISSUE' });
@@ -23,22 +25,20 @@ const Detail = () => {
   }, []);
 
   return (
-    <>
+    <DetailContainer>
       {state.isLoading ? (
         <>이슈를 받아오는 중입니다.</>
       ) : (
         <>
-          <div>{state.data![0].number}</div>
-          <div>{state.data![0].title}</div>
-          <div>{state.data![0].user.id}</div>
-          <div>{state.data![0].created_at}</div>
-          <div>{state.data![0].comments}</div>
-          <img src={state.data![0].user.avatar_url} alt="" />
-          <div>{state.data![0].body}</div>
+          <DetailItem props={state.data![0]} />
         </>
       )}
-    </>
+    </DetailContainer>
   );
 };
+const DetailContainer = styled(Container)`
+  height: 100%;
+  background-color: ${props => props.theme.subBoxColor};
+`;
 
 export default Detail;
