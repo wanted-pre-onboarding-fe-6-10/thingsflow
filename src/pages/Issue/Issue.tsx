@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect, useState, useRef } from 'react';
 import AppContext from '../../AppContext';
-import IssueItem from './IssueItem/IssueItem';
+import IssueItem from 'pages/Issue/IssueItem/IssueItem';
 import Loading from 'components/Loading';
-import { getIssueList } from '../../api/issueApi';
+import { getIssueList } from 'api/issueApi';
 
 let pageNum = 1;
 
@@ -37,7 +37,11 @@ const Issue = () => {
   };
 
   useEffect(() => {
+    if (pageNum !== 1) {
+      return;
+    }
     getRequest(pageNum);
+    pageNum += 1;
   }, []);
 
   const handleScroll = () => {

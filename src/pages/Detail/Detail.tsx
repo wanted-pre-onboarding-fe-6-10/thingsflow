@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Loading from 'components/Loading';
-import { getIssueItem } from '../../api/issueApi';
+import { getIssueItem } from 'api/issueApi';
 import MarkdownRenderer from 'components/MarkdownRenderer';
 
 const Detail = () => {
