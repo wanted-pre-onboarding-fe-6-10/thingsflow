@@ -31,7 +31,7 @@ const IssueBox = () => {
                   <InfoText>작성일: {dateConvert(issue.created_at)}</InfoText>
                 </SubInfo>
               </Wrapper>
-              <Comments>{issue.comments}</Comments>
+              <Comments>코멘트{issue.comments}</Comments>
             </IssueInfo>
           </Box>
         );
@@ -51,7 +51,7 @@ const Box = styled.div`
   align-items: center;
 `;
 const AdImg = styled.img`
-  width: 20%;
+  width: 10%;
 `;
 const TitleBox = styled.p`
   font-size: 1rem;
@@ -80,12 +80,14 @@ const IssueInfo = styled.p`
 const AdBox = styled.a`
   text-align: center;
   margin: 2rem 0;
+  background-color: #fff;
 `;
 
 const Comments = styled.p`
   margin: 1rem;
   display: flex;
   align-items: center;
+  text-align: center;
 `;
 const Wrapper = styled.div`
   margin: 0 1rem;
