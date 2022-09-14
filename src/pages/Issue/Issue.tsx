@@ -57,5 +57,5 @@ const Observer = styled.div`
   margin: 2rem;
 `;
 const LoadImg = styled.img`
-  width: 30%;
+  width: 15%;
 `;

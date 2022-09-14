@@ -125,6 +125,6 @@ const Comments = styled.p`
 
 const Observer = styled.img`
   text-align: center;
-  width: 50%;
+  width: 20%;
   margin: 2rem;
 `;
