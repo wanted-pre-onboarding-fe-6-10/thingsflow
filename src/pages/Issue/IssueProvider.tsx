@@ -1,30 +1,15 @@
-import { createContext, useEffect, useState } from 'react';
-import { getIssueList } from 'api/api';
-import React from 'react';
+import React, { useState } from 'react';
+import { IssueContextType, IssueType, Props } from 'src/type/type';
 
-export const IssueContext = createContext<Issuetype[] | null>(null);
-
-interface Props {
-  children: JSX.Element | JSX.Element[];
-}
-
-interface Issuetype {
-  [key: string]: any;
-}
+export const IssueContext = React.createContext<IssueContextType>({
+  issues: [],
+  setIssues: () => null,
+});
 
 const IssueProvider = ({ children }: Props) => {
-  useEffect(() => {
-    getIssues();
-  }, []);
+  const [issues, setIssues] = useState<IssueType[]>([]);
 
-  const [issues, setIssues] = useState<Issuetype[]>([]);
-
-  const getIssues = async () => {
-    const res = await getIssueList();
-    setIssues(res);
-  };
-
-  return <IssueContext.Provider value={issues}>{children}</IssueContext.Provider>;
+  return <IssueContext.Provider value={{ issues, setIssues }}>{children}</IssueContext.Provider>;
 };
 
 export default IssueProvider;
