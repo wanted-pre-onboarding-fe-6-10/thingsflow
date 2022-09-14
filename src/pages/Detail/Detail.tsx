@@ -5,11 +5,13 @@ import { IssueType } from 'src/type/type';
 import ReactMarkdown from 'react-markdown';
 import styled from 'styled-components';
 import dateConvert from 'utils/convertStringTodate';
+import 'github-markdown-css';
 
 const Detail = () => {
   const { number } = useParams();
   const issueURL = `/issues/`;
   const [issueDetail, setIssueDetail] = useState<IssueType | undefined>();
+  const [isLoading, setIsLoading] = useState(true);
   const getIssueDetail = async () => {
     const response = await getIssueList(issueURL + number);
     setIssueDetail(response);
@@ -19,27 +21,39 @@ const Detail = () => {
     getIssueDetail();
   }, []);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+  }, []);
+
   return (
     <Container>
-      <Box>
-        <ProfileImg src={issueDetail?.user.avatar_url} />
-        <IssueInfo>
-          <Wrapper>
-            <TitleBox>
-              <Title>#{issueDetail?.number} </Title>
-              <Title> {issueDetail?.title}</Title>
-            </TitleBox>
-            <SubInfo>
-              <InfoText>작성자: {issueDetail?.user.login} </InfoText>
-              <>작성일: {dateConvert(issueDetail?.created_at as Date)}</>
-            </SubInfo>
-          </Wrapper>
-          <Comments>{issueDetail?.comments}</Comments>
-        </IssueInfo>
-      </Box>
-      <MainBox>
-        <ReactMarkdown>{issueDetail?.body as string}</ReactMarkdown>
-      </MainBox>
+      {isLoading ? (
+        <Observer>Loding...</Observer>
+      ) : (
+        <>
+          <Box>
+            <ProfileImg src={issueDetail?.user.avatar_url} />
+            <IssueInfo>
+              <Wrapper>
+                <TitleBox>
+                  <Title>#{issueDetail?.number} </Title>
+                  <Title> {issueDetail?.title}</Title>
+                </TitleBox>
+                <SubInfo>
+                  <InfoText>작성자: {issueDetail?.user.login} </InfoText>
+                  <>작성일: {dateConvert(issueDetail?.created_at as Date)}</>
+                </SubInfo>
+              </Wrapper>
+              <Comments>코멘트 {issueDetail?.comments}</Comments>
+            </IssueInfo>
+          </Box>
+          <MainBox>
+            <ReactMarkdown className="markdown-body">{issueDetail?.body as string}</ReactMarkdown>
+          </MainBox>
+        </>
+      )}
     </Container>
   );
 };
@@ -55,6 +69,7 @@ const Container = styled.div`
 const MainBox = styled.div`
   width: 70%;
   margin: 2rem;
+  padding: 1rem;
   line-height: 2rem;
 `;
 const Box = styled.div`
@@ -94,4 +109,9 @@ const SubInfo = styled.p`
 const Comments = styled.p`
   width: 10%;
   margin: 0 2rem;
+`;
+
+const Observer = styled.div`
+  text-align: center;
+  margin: 2rem;
 `;
