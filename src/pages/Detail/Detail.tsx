@@ -48,7 +48,7 @@ const Detail = () => {
                 </p>
               </TitleContainer>
 
-              <div>코멘트 : {detailData.comments}</div>
+              <div>코멘트 {detailData.comments}</div>
             </TitleBox>
             <Content>
               <MarkdownRenderer content={detailData.body} />

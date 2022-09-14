@@ -33,7 +33,7 @@ const IssueItem = () => {
               </p>
             </div>
 
-            <div>코멘트 : {data.comments}</div>
+            <div>코멘트 {data.comments}</div>
           </ItemBox>
         );
       })}
