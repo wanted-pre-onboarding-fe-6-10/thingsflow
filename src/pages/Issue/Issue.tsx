@@ -1,16 +1,14 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { IssueContext } from './IssueProvider';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { getIssueList } from 'api/api';
-import dateConvert from 'utils/convertStringTodate';
 import IssueBox from './IssueBox';
 
 const Issue = () => {
-  const nav = useNavigate();
   const issueURL = `/issues?state=open&sort=comments&page=`;
   const handleIssueList = useContext(IssueContext);
-  const { issues, setIssues } = handleIssueList;
+  const { setIssues } = handleIssueList;
   const [pageNum, setPageNum] = useState(1);
   const [loading, setLoading] = useState(false);
   const observerRef = useRef<HTMLDivElement>(null);
@@ -42,7 +40,7 @@ const Issue = () => {
   return (
     <IssueContainer>
       <IssueBox />
-      <div ref={observerRef}>Loding...</div>
+      <Observer ref={observerRef}>Loding...</Observer>
     </IssueContainer>
   );
 };
@@ -50,3 +48,7 @@ const Issue = () => {
 export default Issue;
 
 const IssueContainer = styled.div``;
+const Observer = styled.div`
+  text-align: center;
+  margin: 2rem;
+`;

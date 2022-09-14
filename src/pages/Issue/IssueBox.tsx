@@ -44,7 +44,6 @@ export default IssueBox;
 
 const Container = styled.div`
   background-color: #eeeeee;
-  border-radius: 5px;
 `;
 const Box = styled.div`
   display: flex;
@@ -71,8 +70,11 @@ const IssueInfo = styled.p`
   justify-content: space-between;
   margin: 2rem auto;
   width: 80%;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #9e9e9e;
   cursor: pointer;
+  &:hover {
+    border-bottom: 2px solid #9e9e9e;
+  }
 `;
 
 const AdBox = styled.a`
