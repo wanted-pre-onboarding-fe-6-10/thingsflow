@@ -1,7 +1,6 @@
 import { useContext, useEffect, useRef, useState } from 'react';
 import { IssueContext } from './IssueProvider';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
 import { getIssueList } from 'api/api';
 import IssueBox from './IssueBox';
 
