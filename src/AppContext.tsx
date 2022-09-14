@@ -119,7 +119,6 @@ export interface IssueDataType {
 interface IssueListType {
   issueListData: IssueDataType[];
   setIssueListData: Dispatch<SetStateAction<IssueDataType[]>>;
-  // [질문clear] IssueList[]를 받는 setState함수의 type임
 }
 
 const AppContext = React.createContext<IssueListType>({

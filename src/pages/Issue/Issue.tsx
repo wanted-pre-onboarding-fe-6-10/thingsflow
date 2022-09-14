@@ -30,7 +30,6 @@ const Issue = () => {
       const ad = { type: 'ad', id: Date.now() };
       SortedData.splice(4, 0, ad);
 
-      // 4번째 인덱스 가공한 후, set하기
       appContext.setIssueListData(SortedData);
     }
   };

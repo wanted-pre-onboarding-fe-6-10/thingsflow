@@ -7,7 +7,6 @@ import Issue from './pages/Issue/Issue';
 import Header from './components/Header';
 
 const Router = () => {
-  // [질문clear] -type?
   const [issueListData, setIssueListData] = useState<IssueDataType[]>([]);
 
   return (

@@ -10,31 +10,33 @@ const IssueItem = () => {
 
   const navigator = useNavigate();
 
-  // ⭐️ ⭐️ ⭐️ ⭐️ ⭐️ ⭐️ ⭐️ ⭐️ ⭐️ ⭐️ ⭐️ ⭐️ ⭐️ ⭐️ ⭐️ ⭐️ ⭐️ ⭐️ ⭐️ ⭐️ ⭐️ ⭐️ ⭐️
-  //  ✅
+  //  ✅ 0.무한로딩 필요 변수들
   const [slicedData, setSlicedData] = useState<IssueDataType[]>([]);
   const isLoading = useRef(false);
   let lastId = 7;
 
   //  ✅ 1.처음 7개 렌더
   useEffect(() => {
+    if (issueListData.length === 0) {
+      return;
+    }
     const DefaultData = issueListData.slice(0, lastId); // 7개씩
     setSlicedData(DefaultData);
-  }, [issueListData]);
+  }, [issueListData, lastId]);
 
-  // ✅
+  // ✅ 3. 스크롤 이벤트 발생
   const handleScroll = () => {
     const scrollHeight = document.documentElement.scrollHeight;
 
     if (isLoading.current === false && window.innerHeight + window.scrollY >= scrollHeight - 200) {
       isLoading.current = true;
 
-      lastId += slicedData.length; // 14
+      lastId += slicedData.length;
       const updateData = issueListData.slice(0, lastId);
 
       setSlicedData(updateData);
 
-      // ✅
+      // 마지막 데이터면 스크롤 이벤트 발생x
       if (issueListData.length === slicedData.length) {
         isLoading.current = true;
         return;
@@ -43,16 +45,14 @@ const IssueItem = () => {
     }
   };
 
-  // ✅
+  // ✅ 2.처음 스크롤 이벤트 발생시만 handleScroll 실행되도록
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
-    // ?
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slicedData]);
-
-  // ⭐️ ⭐️ ⭐️ ⭐️ ⭐️ ⭐️ ⭐️ ⭐️ ⭐️ ⭐️ ⭐️ ⭐️ ⭐️ ⭐️ ⭐️ ⭐️ ⭐️ ⭐️ ⭐️ ⭐️ ⭐️ ⭐️ ⭐️
 
   return (
     <ItemWrapper>

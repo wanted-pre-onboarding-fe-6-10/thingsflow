@@ -16,7 +16,6 @@ interface Theme {
   subBoxColor2: string;
 }
 
-// [질문clear] - styled-component의 propd은 이렇게 <{}>제네릭으로 지정할 수 있음
 const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
 ${reset}
 /* HTML5 display-role reset for older browsers */
