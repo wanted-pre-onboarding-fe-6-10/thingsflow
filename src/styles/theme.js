@@ -1,8 +1,8 @@
 export const lightTheme = {
   // main색상
-  ownColor: '#459228',
+  ownColor: '#FFD779',
   // 마우스올렸을 때
-  ownColorHover: '#417131',
+  ownColorHover: '#FFBC20',
   // 메인 바탕화면
   bgColor: '#ffffff',
   // 주문하기 배경색상
