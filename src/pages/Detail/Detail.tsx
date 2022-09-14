@@ -6,6 +6,7 @@ import ReactMarkdown from 'react-markdown';
 import styled from 'styled-components';
 import dateConvert from 'utils/convertStringTodate';
 import 'github-markdown-css';
+import { loadingImg } from 'pages/Issue/IssueProvider';
 
 const Detail = () => {
   const { number } = useParams();
@@ -30,7 +31,7 @@ const Detail = () => {
   return (
     <Container>
       {isLoading ? (
-        <Observer>Loding...</Observer>
+        <Observer src={loadingImg} alt="로딩중..." />
       ) : (
         <>
           <Box>
@@ -77,6 +78,10 @@ const Box = styled.div`
   display: flex;
   align-items: center;
   border-bottom: 1px solid #707070;
+  @media screen and (max-width: 950px) {
+    flex-direction: column;
+    width: 100%;
+  }
 `;
 const ProfileImg = styled.img`
   width: 15%;
@@ -88,6 +93,9 @@ const IssueInfo = styled.div`
   align-items: center;
   margin: 0 2rem;
   width: 70%;
+  @media screen and (max-width: 950px) {
+    flex-direction: column;
+  }
 `;
 const Wrapper = styled.div`
   width: 80%;
@@ -109,9 +117,14 @@ const SubInfo = styled.p`
 const Comments = styled.p`
   width: 10%;
   margin: 0 2rem;
+  @media screen and (max-width: 950px) {
+    text-align: center;
+    width: 50%;
+  }
 `;
 
-const Observer = styled.div`
+const Observer = styled.img`
   text-align: center;
+  width: 20%;
   margin: 2rem;
 `;
