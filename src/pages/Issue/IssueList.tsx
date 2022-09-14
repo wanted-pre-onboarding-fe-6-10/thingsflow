@@ -14,9 +14,10 @@ type Issue = {
 
 type Issues = {
   issue: Issue;
+  index: number;
 };
 
-const IssueList = ({ issue }: Issues) => {
+const IssueList = ({ index, issue }: Issues) => {
   const navigate = useNavigate();
 
   const onMoveDetail = () => {
@@ -24,21 +25,28 @@ const IssueList = ({ issue }: Issues) => {
   };
 
   return (
-    <Container onClick={onMoveDetail}>
-      <IssueInfoBox>
-        <IssueTitle>
-          <span>#{issue.number}</span>
-          <span>{issue.title}</span>
-        </IssueTitle>
-        <IssueInfo>
-          <span>작성자 : {issue.user.login}</span>
-          <span>작성일 : {issue.updated_at.slice(0, 10)}</span>
-        </IssueInfo>
-      </IssueInfoBox>
-      <IssueCommentBox>
-        <span>코멘트 : {issue.comments}</span>
-      </IssueCommentBox>
-    </Container>
+    <>
+      {index === 4 && (
+        <LogoBox onClick={() => window.open('https://thingsflow.com/ko/home', '_blank')}>
+          <img src="/띵스플로우.png" alt="logo" />
+        </LogoBox>
+      )}
+      <Container onClick={onMoveDetail}>
+        <IssueInfoBox>
+          <IssueTitle>
+            <span>#{issue.number}</span>
+            <span>{issue.title}</span>
+          </IssueTitle>
+          <IssueInfo>
+            <span>작성자 : {issue.user.login}</span>
+            <span>작성일 : {issue.updated_at.slice(0, 10)}</span>
+          </IssueInfo>
+        </IssueInfoBox>
+        <IssueCommentBox>
+          <span>코멘트 : {issue.comments}</span>
+        </IssueCommentBox>
+      </Container>
+    </>
   );
 };
 
@@ -53,16 +61,12 @@ const Container = styled.div`
   padding: 1rem;
   cursor: pointer;
 
-  @media (max-width: 375px) {
+  @media (max-width: 768px) {
     flex-direction: column;
     align-items: flex-start;
   }
 `;
-const IssueInfoBox = styled.div`
-  /* width: 80%;
-  overflow: hidden;
-  white-space: nowrap; */
-`;
+const IssueInfoBox = styled.div``;
 const IssueCommentBox = styled.div`
   font-size: 0.875rem;
   color: ${lightTheme.subTextColor};
@@ -79,9 +83,24 @@ const IssueTitle = styled.div`
   }
 `;
 const IssueInfo = styled.div`
+  margin-top: 0.8rem;
   font-size: 0.875rem;
   color: ${lightTheme.subTextColor};
   span {
     margin-right: 1rem;
+  }
+`;
+
+const LogoBox = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid ${lightTheme.borderColor};
+
+  img {
+    width: 50px;
+    height: 50px;
   }
 `;
