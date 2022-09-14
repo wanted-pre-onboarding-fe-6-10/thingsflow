@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from 'react';
-import { IssueContext } from './IssueProvider';
+import { IssueContext, loadingImg } from './IssueProvider';
 import styled from 'styled-components';
 import { getIssueList } from 'api/api';
 import IssueBox from './IssueBox';
@@ -39,15 +39,23 @@ const Issue = () => {
   return (
     <IssueContainer>
       <IssueBox />
-      <Observer ref={observerRef}>Loding...</Observer>
+      <LoadImg src={loadingImg} alt="로딩중..." />
+      <Observer ref={observerRef}> </Observer>
     </IssueContainer>
   );
 };
 
 export default Issue;
 
-const IssueContainer = styled.div``;
+const IssueContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 const Observer = styled.div`
   text-align: center;
   margin: 2rem;
+`;
+const LoadImg = styled.img`
+  width: 30%;
 `;
