@@ -4,11 +4,13 @@ import IssueList from './IssueList';
 import { getGithubIssues } from 'api/gitAPI';
 import { useEffect, useState } from 'react';
 import Loading from 'components/Loading';
+import { useIssueDispatch, useIssueState } from 'utils/SampleContext';
 
 const Issue = () => {
-  const [issues, setIssues] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  const dispatch = useIssueDispatch();
+  const state = useIssueState();
 
   const handleScroll = () => {
     const scrollHeight = document.documentElement.scrollHeight;
@@ -24,13 +26,13 @@ const Issue = () => {
     const getRandomImageThenSet = async () => {
       try {
         const res = await getGithubIssues(page);
-        setIssues(issues.concat(res));
+        dispatch({ type: 'SET_ISSUE', issue: res });
       } catch {
         console.error('fetching error');
       }
     };
     getRandomImageThenSet();
-  }, [page]);
+  }, [page, dispatch]);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
@@ -39,15 +41,13 @@ const Issue = () => {
     };
   }, []);
 
-  console.log(issues);
-
   return (
     <Template>
       <Header />
       {loading ? (
         <Loading />
       ) : (
-        issues && issues.map((issue, idx) => <IssueList key={idx} issue={issue} />)
+        state.issue && state?.issue.map((issue, idx) => <IssueList key={idx} issue={issue} />)
       )}
     </Template>
   );

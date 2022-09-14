@@ -22,6 +22,7 @@ const IssueList = ({ issue }: Issues) => {
   const onMoveDetail = () => {
     navigate(`/${issue.number}`);
   };
+
   return (
     <Container onClick={onMoveDetail}>
       <IssueInfoBox>
