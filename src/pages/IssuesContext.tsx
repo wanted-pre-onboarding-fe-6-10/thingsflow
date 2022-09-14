@@ -1,8 +1,11 @@
 import React, { createContext, useReducer, useContext, Dispatch } from 'react';
-import { ActionType, IssueType, StateType } from 'utils/Type';
+import { ActionType, StateType } from 'utils/Type';
 
-const IssuesContext = createContext<StateType | null>(null);
-const IssuesDispatchContext = createContext<Dispatch<ActionType> | null>(null);
+const IssuesListContext = createContext<StateType | null>(null);
+const IssuesListDispatchContext = createContext<Dispatch<ActionType> | null>(null);
+
+const IssueContext = createContext<StateType | null>(null);
+const IssueDispatchContext = createContext<Dispatch<ActionType> | null>(null);
 
 const reducer = (state: StateType, action: ActionType): StateType => {
   switch (action.type) {
@@ -27,54 +30,55 @@ const reducer = (state: StateType, action: ActionType): StateType => {
   }
 };
 
+export const IssuesProvider = ({ children }: { children: React.ReactNode }) => {
+  const [state, dispatch] = useReducer(reducer, {
+    isLoading: true,
+    isError: false,
+    data: [],
+  });
+
+  return (
+    <IssuesListContext.Provider value={state}>
+      <IssuesListDispatchContext.Provider value={dispatch}>
+        {children}
+      </IssuesListDispatchContext.Provider>
+    </IssuesListContext.Provider>
+  );
+};
+
 export const IssueProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(reducer, {
     isLoading: true,
     isError: false,
-    data: [
-      {
-        url: '',
-        html_url: '',
-        number: 0,
-        title: '',
-        user: {
-          login: '',
-          id: 0,
-          node_id: '',
-          avatar_url: '',
-          html_url: '',
-        },
-        state: '',
-        locked: false,
-        comments: 0,
-        created_at: '',
-        updated_at: '',
-        closed_at: '',
-        body: '',
-        reactions: {
-          url: '',
-          total_count: 0,
-        },
-        timeline_url: '',
-      },
-    ],
+    data: [],
   });
-
   return (
-    <IssuesContext.Provider value={state}>
-      <IssuesDispatchContext.Provider value={dispatch}> {children} </IssuesDispatchContext.Provider>
-    </IssuesContext.Provider>
+    <IssueContext.Provider value={state}>
+      <IssueDispatchContext.Provider value={dispatch}>{children}</IssueDispatchContext.Provider>
+    </IssueContext.Provider>
   );
 };
 
+export const useIssuesListState = () => {
+  const state = useContext(IssuesListContext);
+  if (!state) throw new Error('IssuesProvider를 못찾겠습니다.');
+  return state;
+};
+
+export const useIssuesListDispatch = () => {
+  const dispatch = useContext(IssuesListDispatchContext);
+  if (!dispatch) throw new Error('IssuesProvider를 못찾겠습니다.');
+  return dispatch;
+};
+
 export const useIssueState = () => {
-  const state = useContext(IssuesContext);
+  const state = useContext(IssueContext);
   if (!state) throw new Error('IssueProvider를 못찾겠습니다.');
   return state;
 };
 
 export const useIssueDispatch = () => {
-  const dispatch = useContext(IssuesDispatchContext);
+  const dispatch = useContext(IssueDispatchContext);
   if (!dispatch) throw new Error('IssueProvider를 못찾겠습니다.');
   return dispatch;
 };

@@ -1,35 +1,42 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { issueAxios } from 'api/getIssue';
+import { useIssueDispatch, useIssueState } from 'pages/IssuesContext';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { IssueType } from 'utils/Type';
 
 const Detail = () => {
   const params = useParams();
-  const [detail, setDetail] = useState<IssueType>();
-  const issueAxios = axios.create({
-    baseURL: process.env.REACT_APP_BASE_URL,
-    headers: {
-      Authorization: `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`,
-    },
-  });
+  const state = useIssueState();
+  const dispatch = useIssueDispatch();
+
   const getDetail = async () => {
-    const res = await issueAxios.get(`/${params.number}`);
-    setDetail(res.data);
+    try {
+      dispatch({ type: 'GET_ISSUE' });
+      const res = await issueAxios.get(`/${params.number}`);
+      dispatch({ type: 'GET_ISSUE_SUCCESS', data: [res.data] });
+    } catch {
+      dispatch({ type: 'GET_ISSUE_ERROR' });
+    }
   };
+
   useEffect(() => {
-    if (detail) return;
     getDetail();
-  });
+  }, []);
 
   return (
     <>
-      <div>{detail?.number}</div>
-      <div>{detail?.title}</div>
-      <div>{detail?.user.id}</div>
-      <div>{detail?.created_at}</div>
-      <div>{detail?.comments}</div>
-      <img src={detail?.user.avatar_url} alt="" />
-      <div>{detail?.body}</div>
+      {state.isLoading ? (
+        <>이슈를 받아오는 중입니다.</>
+      ) : (
+        <>
+          <div>{state.data![0].number}</div>
+          <div>{state.data![0].title}</div>
+          <div>{state.data![0].user.id}</div>
+          <div>{state.data![0].created_at}</div>
+          <div>{state.data![0].comments}</div>
+          <img src={state.data![0].user.avatar_url} alt="" />
+          <div>{state.data![0].body}</div>
+        </>
+      )}
     </>
   );
 };

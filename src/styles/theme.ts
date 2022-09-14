@@ -1,6 +1,5 @@
 import { DefaultTheme } from 'styled-components';
 
-// 밝은 테마
 export const lightTheme: DefaultTheme = {
   ownColor: '#00a8ff',
   ownColorHover: '#0086cc',
@@ -13,7 +12,6 @@ export const lightTheme: DefaultTheme = {
   subBoxColor2: '#ffffff',
 };
 
-// 어두운 테마
 export const darkTheme: DefaultTheme = {
   ownColor: '#00a8ff',
   ownColorHover: '#0086cc',

@@ -30,6 +30,6 @@ export interface StateType {
 }
 
 export interface ActionType {
-  type: 'GET_ISSUE' | 'GET_ISSUE_SUCCESS' | 'GET_ISSUE_ERROR';
+  type: 'GET_ISSUE' | 'GET_FIRST_ISSUE' | 'GET_ISSUE_SUCCESS' | 'GET_ISSUE_ERROR';
   data?: IssueType[];
 }
