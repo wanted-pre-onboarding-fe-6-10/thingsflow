@@ -1,3 +1,5 @@
+import { SelectChangeEvent } from '@mui/material';
+
 export interface IssueType {
   url: string;
   html_url: string;
@@ -32,4 +34,30 @@ export interface StateType {
 export interface ActionType {
   type: 'GET_ISSUE' | 'GET_FIRST_ISSUE' | 'GET_ISSUE_SUCCESS' | 'GET_ISSUE_ERROR';
   data?: IssueType[];
+}
+
+export interface IssueProps {
+  index: number;
+  issue: IssueType;
+}
+
+export interface ContentProps {
+  props: IssueType;
+}
+
+export interface MarkdownProps {
+  markdown: string;
+}
+
+export interface Parameter {
+  sort?: string;
+  state?: string;
+  perPage?: number;
+  page?: number;
+}
+
+export interface SelectProps {
+  title: string;
+  onSelect: (e: SelectChangeEvent<string | any>) => void;
+  content: string[];
 }

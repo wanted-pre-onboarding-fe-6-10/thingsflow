@@ -3,20 +3,23 @@ import Spinner from 'components/spinner';
 import { Container, SpinnerBox } from 'pages/Issue/Issue';
 import { useIssueDispatch, useIssueState } from 'pages/IssuesContext';
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import DetailItem from './Detailitem/DetailItem';
 
 const Detail = () => {
   const params = useParams();
+  const navigate = useNavigate();
   const state = useIssueState();
   const dispatch = useIssueDispatch();
   const getDetail = async () => {
     try {
       dispatch({ type: 'GET_ISSUE' });
-      const res = await issueAxios.get(`/${params.number}`);
+      const res = await issueAxios.get(`issues/${params.number}`);
       dispatch({ type: 'GET_ISSUE_SUCCESS', data: [res.data] });
     } catch {
+      alert('잘못된 경로입니다. 메인화면으로 돌아갑니다.');
+      navigate('/');
       dispatch({ type: 'GET_ISSUE_ERROR' });
     }
   };
