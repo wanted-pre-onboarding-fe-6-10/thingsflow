@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import React, { Dispatch, SetStateAction } from 'react';
 interface User {
   login: string;
@@ -119,12 +120,15 @@ export interface IssueDataType {
 interface IssueListType {
   issueListData: IssueDataType[];
   setIssueListData: Dispatch<SetStateAction<IssueDataType[]>>;
+  isLoading: boolean;
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
 }
 
 const AppContext = React.createContext<IssueListType>({
   issueListData: [],
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   setIssueListData: () => {},
+  isLoading: true,
+  setIsLoading: () => {},
 });
 
 export default AppContext;

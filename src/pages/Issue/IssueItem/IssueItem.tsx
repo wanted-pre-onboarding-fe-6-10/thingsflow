@@ -12,7 +12,7 @@ const IssueItem = () => {
 
   //  ✅ 0.무한로딩 필요 변수들
   const [slicedData, setSlicedData] = useState<IssueDataType[]>([]);
-  const isLoading = useRef(false);
+  const isLoading = useRef(false); // [질문] 이게 활용되는 원리
   let lastId = 7;
 
   //  ✅ 1.처음 7개 렌더
@@ -36,7 +36,7 @@ const IssueItem = () => {
 
       setSlicedData(updateData);
 
-      // 마지막 데이터면 스크롤 이벤트 발생x
+      // 마지막 데이터면 스크롤 이벤트 발생x [질문]
       if (issueListData.length === slicedData.length) {
         isLoading.current = true;
         return;
@@ -49,7 +49,7 @@ const IssueItem = () => {
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', handleScroll); // [질문] 언제 unmount가 되는지?
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slicedData]);

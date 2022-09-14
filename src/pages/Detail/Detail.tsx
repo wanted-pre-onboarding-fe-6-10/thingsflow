@@ -1,7 +1,9 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import AppContext from '../../AppContext';
+import Loading from 'components/Loading';
 
 interface User {
   login: string;
@@ -85,9 +87,10 @@ const Detail = () => {
 
   const { number } = useParams();
 
-  const [detailData, setDetailData] = useState<DetailType | null>(null);
+  const appContext = useContext(AppContext);
+  const { isLoading, setIsLoading } = appContext;
 
-  const bodyEl: HTMLDivElement = document.createElement('div');
+  const [detailData, setDetailData] = useState<DetailType | null>(null);
 
   const getRequest = async () => {
     const response = await axios({
@@ -96,8 +99,10 @@ const Detail = () => {
     });
 
     if (response.status === 200) {
+      setInterval(() => {
+        setIsLoading(false);
+      }, 1000);
       setDetailData(response.data);
-      bodyEl.innerHTML = response.data.body;
     }
   };
 
@@ -108,28 +113,32 @@ const Detail = () => {
 
   return (
     <div>
-      {detailData && (
-        <DetailWrapper>
-          <TitleBox>
-            <UserImg src={detailData.user.avatar_url} alt="userImg" />
+      {isLoading ? (
+        <Loading />
+      ) : (
+        detailData && (
+          <DetailWrapper>
+            <TitleBox>
+              <UserImg src={detailData.user.avatar_url} alt="userImg" />
 
-            <TitleContainer>
-              <Number style={{ fontWeight: 'bold' }}>#{detailData.number}</Number>
+              <TitleContainer>
+                <Number style={{ fontWeight: 'bold' }}>#{detailData.number}</Number>
 
-              <Title>{detailData.title}</Title>
+                <Title>{detailData.title}</Title>
 
-              <p>
-                <span>작성자 : {detailData.user.login} ,</span>
-                <span> 작성일 : {new Date(detailData.created_at).toLocaleString()}</span>
-              </p>
-            </TitleContainer>
+                <p>
+                  <span>작성자 : {detailData.user.login} ,</span>
+                  <span> 작성일 : {new Date(detailData.created_at).toLocaleString()}</span>
+                </p>
+              </TitleContainer>
 
-            <div>코멘트 : {detailData.comments}</div>
-          </TitleBox>
-          <Content>
-            <div dangerouslySetInnerHTML={{ __html: detailData.body }} />
-          </Content>
-        </DetailWrapper>
+              <div>코멘트 : {detailData.comments}</div>
+            </TitleBox>
+            <Content>
+              <div dangerouslySetInnerHTML={{ __html: detailData.body }} />
+            </Content>
+          </DetailWrapper>
+        )
       )}
     </div>
   );
