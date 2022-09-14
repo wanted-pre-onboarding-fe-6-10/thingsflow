@@ -1,17 +1,15 @@
-import { useNavigate } from 'react-router-dom';
 import { IssueType } from 'src/types/IssueType';
 import styled from 'styled-components';
 import { formatDate } from 'utils/dateFormat';
 
 type IssueItemType = {
   issue: IssueType;
+  setFocusedIssue: any;
 };
 
-const IssueItem = ({ issue }: IssueItemType) => {
-  console.log(issue);
-  const navigate = useNavigate();
+const IssueItem = ({ issue, setFocusedIssue }: IssueItemType) => {
   return (
-    <Wrapper onClick={() => navigate(`/${issue.number}`)}>
+    <Wrapper onClick={() => setFocusedIssue(issue.number)}>
       <Column>
         <Row>
           #{issue.number} {issue.title}
@@ -52,7 +50,5 @@ const Row = styled.div``;
 const Description = styled.div``;
 
 const Comment = styled.div``;
-
-// const;
 
 export default IssueItem;

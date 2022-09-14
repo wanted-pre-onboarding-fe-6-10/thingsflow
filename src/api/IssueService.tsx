@@ -23,7 +23,6 @@ class IssueService {
 
   getIssueDetail(number: number) {
     const response = this.httpClient.get(this.targetRepository + `/issues/${number}`);
-    console.log(Object.keys(response));
     return response;
   }
 }
