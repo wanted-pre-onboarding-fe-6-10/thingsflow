@@ -11,15 +11,13 @@ const Loading = () => {
 export default Loading;
 
 const Wrapper = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100vh;
-  background-color: rgba(240, 248, 255, 0.7);
+  height: 8rem;
+  background-color: rgba(240, 248, 255, 0.8);
 `;
 
 const spin = keyframes`
@@ -32,8 +30,8 @@ to{
 `;
 
 const Cycle = styled.div`
-  width: 200px;
-  height: 100px;
+  width: 12rem;
+  height: 6.5rem;
 
   &::after {
     content: '';

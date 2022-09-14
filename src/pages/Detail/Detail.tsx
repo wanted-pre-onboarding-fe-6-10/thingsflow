@@ -1,25 +1,18 @@
-import axios from 'axios';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import AppContext from '../../AppContext';
 import Loading from 'components/Loading';
+import { getIssueItem } from '../../api/issueApi';
+import MarkdownRenderer from 'components/MarkdownRenderer';
 
 const Detail = () => {
-  const BASE_URL = process.env.REACT_APP_BASE_URL;
-  const API_KEY = process.env.REACT_APP_ACCESS_TOKEN;
+  const [isLoading, setIsLoading] = useState(true);
+  const [detailData, setDetailData] = useState<DetailType | null>(null);
 
   const { number } = useParams();
 
-  const [isLoading, setIsLoading] = useState(true);
-
-  const [detailData, setDetailData] = useState<DetailType | null>(null);
-
   const getRequest = async () => {
-    const response = await axios({
-      url: `${BASE_URL}/${number}`,
-      headers: { Authorization: `${API_KEY}` },
-    });
+    const response = await getIssueItem(number);
 
     if (response.status === 200) {
       setTimeout(() => {
@@ -58,7 +51,7 @@ const Detail = () => {
               <div>코멘트 : {detailData.comments}</div>
             </TitleBox>
             <Content>
-              <div dangerouslySetInnerHTML={{ __html: detailData.body }} />
+              <MarkdownRenderer content={detailData.body} />
             </Content>
           </DetailWrapper>
         )

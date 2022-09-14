@@ -1,47 +1,82 @@
-import axios from 'axios';
-import { useContext, useEffect, useState } from 'react';
-import { IssueDataType } from '../../AppContext';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useContext, useEffect, useState, useRef } from 'react';
 import AppContext from '../../AppContext';
 import IssueItem from './IssueItem/IssueItem';
 import Loading from 'components/Loading';
+import { getIssueList } from '../../api/issueApi';
+
+let itemNum = 7;
 
 const Issue = () => {
-  const BASE_URL = process.env.REACT_APP_BASE_URL;
-  const API_KEY = process.env.REACT_APP_ACCESS_TOKEN;
-
   const appContext = useContext(AppContext);
+  const { setIssueListData } = appContext;
 
-  const [isLoading, setIsLoading] = useState(true);
+  const isScroll = useRef(false); // 무한로딩 실행여부 컨드롤
+  const [isLoading, setIsLoading] = useState(true); // 로딩화면 보여줄지 여부
 
-  const getRequest = async () => {
-    const response = await axios({ url: BASE_URL, headers: { Authorization: `${API_KEY}` } });
+  const getRequest = async (itemNum: number) => {
+    const response = await getIssueList({
+      page: '1',
+      per_page: itemNum,
+      state: 'open',
+      sort: 'comments',
+    });
 
     if (response.status === 200) {
       setTimeout(() => {
         setIsLoading(false);
-      }, 500);
 
-      const openData = response.data.filter((data: IssueDataType) => data.state === 'open');
+        const ad = { type: 'ad', id: Date.now() };
+        response.data.splice(4, 0, ad);
 
-      type sortTpye = { comments: number };
-
-      const SortedData = openData.sort((a: sortTpye, b: sortTpye) =>
-        a.comments > b.comments ? -1 : 1
-      );
-
-      const ad = { type: 'ad', id: Date.now() };
-      SortedData.splice(4, 0, ad);
-
-      appContext.setIssueListData(SortedData);
+        setIssueListData(response.data);
+      }, 1000);
     }
   };
 
+  // ✅1. 처음에 데이터 호출 후 렌더함
   useEffect(() => {
-    getRequest();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    getRequest(itemNum);
   }, []);
 
-  return <div>{isLoading ? <Loading /> : <IssueItem />}</div>;
+  // ✅ 3. 스크롤 이벤트 발생
+  const handleScroll = () => {
+    const scrollHeight = document.documentElement.scrollHeight;
+
+    if (isScroll.current === false && window.innerHeight + window.scrollY >= scrollHeight - 50) {
+      isScroll.current = true; // [3-1] scroll시 마다 계속 handleScroll함수 호출되면 안되서, 처음 scroll시만 handleScroll 호출되게 하기위해
+      itemNum += 7;
+
+      // api
+      getRequest(itemNum);
+    }
+    // [3-3]마지막 데이터면 스크롤 이벤트 발생을 막음
+    // if (issueListData.length === slicedData.length) {
+    //   isScroll.current = true;
+    //   return;
+    // }
+
+    // [3-2] 이래야 다음 스크롤때 scroll이벤트 발생 할 때 -> handleScroll 실행되서
+    setTimeout(() => {
+      isScroll.current = false;
+      setIsLoading(true);
+    }, 500);
+  };
+
+  // ✅ 2. detail 페이지로 이동할때, 디테일 페이지에서는 scorll 이벤트 빼야되서 remove함
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  return (
+    <div>
+      <IssueItem />
+      <div style={{ height: '8rem' }}>{isLoading && <Loading />}</div>
+    </div>
+  );
 };
 
 export default Issue;
