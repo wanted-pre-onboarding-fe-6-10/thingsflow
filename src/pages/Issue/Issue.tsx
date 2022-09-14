@@ -22,16 +22,41 @@ const Issue = () => {
       sort: 'comments',
     });
 
-    if (response.status === 200) {
-      setTimeout(() => {
-        setIsLoading(false);
+    const response1 = await getIssueList({
+      page: '1',
+      per_page: 7,
+      state: 'open',
+      sort: 'comments',
+    });
 
-        const ad = { type: 'ad', id: Date.now() };
-        response.data.splice(4, 0, ad);
+    const response2 = await getIssueList({
+      page: '2',
+      per_page: 7,
+      state: 'open',
+      sort: 'comments',
+    });
 
-        setIssueListData(response.data);
-      }, 1000);
-    }
+    const response3 = await getIssueList({
+      page: '1',
+      per_page: 14,
+      state: 'open',
+      sort: 'comments',
+    });
+
+    console.log(response1.data);
+    console.log(response2.data);
+    console.log(response3.data);
+
+    // if (response.status === 200) {
+    //   setTimeout(() => {
+    //     setIsLoading(false);
+
+    //     const ad = { type: 'ad', id: Date.now() };
+    //     response.data.splice(4, 0, ad);
+
+    //     setIssueListData(response.data);
+    //   }, 1000);
+    // }
   };
 
   // ✅1. 처음에 데이터 호출 후 렌더함
@@ -47,14 +72,8 @@ const Issue = () => {
       isScroll.current = true; // [3-1] scroll시 마다 계속 handleScroll함수 호출되면 안되서, 처음 scroll시만 handleScroll 호출되게 하기위해
       itemNum += 7;
 
-      // api
       getRequest(itemNum);
     }
-    // [3-3]마지막 데이터면 스크롤 이벤트 발생을 막음
-    // if (issueListData.length === slicedData.length) {
-    //   isScroll.current = true;
-    //   return;
-    // }
 
     // [3-2] 이래야 다음 스크롤때 scroll이벤트 발생 할 때 -> handleScroll 실행되서
     setTimeout(() => {
