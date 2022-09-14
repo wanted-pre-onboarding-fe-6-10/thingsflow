@@ -1,4 +1,4 @@
-import Detail from 'pages/Detail/Detail';
+import Detail from 'pages/Detail/Detail2';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import IssueItem from './IssueItem';
@@ -7,10 +7,6 @@ import Spinner from 'components/Spinner';
 import { IssueType } from 'src/types/IssueType';
 
 const IssueList = () => {
-  // const [pageNumber, setPageNumber] = useState(1);
-  // const [isLoading, setIsLoading] = useState(false);
-
-  //TODO useContext()로 대체
   const { issues, isLoading, error, setTargetRepository, lastIssueElementRef } = useIssue();
 
   const [focusedIssue, setFocusedIssue] = useState(-1);
@@ -18,31 +14,6 @@ const IssueList = () => {
   useEffect(() => {
     setTargetRepository('angular/angular-cli');
   }, []);
-
-  // const { issues, hasMore, loading, error } = useIssueSearch({ query: '', pageNumber });
-
-  // const observer = useRef<any>();
-
-  // const lastIssueElementRef = useCallback(
-  //   (node: any) => {
-  //     if (loading) return;
-  //     if (observer.current) observer.current.disconnect();
-  //     observer.current = new IntersectionObserver(entries => {
-  //       if (entries[0].isIntersecting && hasMore) {
-  //         setPageNumber(prev => prev + 1);
-  //       }
-  //     });
-  //     if (node) observer.current.observe(node);
-  //   },
-  //   [loading, hasMore]
-  // );
-
-  // useEffect(() => {
-  //   // TODO Delete: 시연용
-  //   setInterval(() => console.log(''), 10000);
-
-  //   setIsLoading(loading);
-  // }, [loading]);
 
   return (
     <Box>
@@ -61,11 +32,11 @@ const IssueList = () => {
         {isLoading && <Spinner />}
       </ListWrapper>
 
-      {/* {focusedIssue !== -1 && (
+      {focusedIssue !== -1 && (
         <DetailWrapper>
           <Detail issueNumber={focusedIssue} />
         </DetailWrapper>
-      )} */}
+      )}
     </Box>
   );
 };
@@ -98,6 +69,9 @@ const IssueItemWrapper = styled.div`
 const DetailWrapper = styled.div`
   background-color: white;
   padding: 2rem;
+  @media screen and (max-width: 620px) {
+    display: none;
+  }
 `;
 
 const Banner = styled.a``;
