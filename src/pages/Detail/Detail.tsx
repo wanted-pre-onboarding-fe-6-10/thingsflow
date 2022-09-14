@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { lightTheme } from 'styles/theme';
+import MarkdownRender from './MarkdownRender';
 
 type User = {
   number: number;
@@ -61,7 +62,9 @@ const Detail = () => {
             </IssueCommentBox>
           </DetailIssueWrapper>
         </DetailBox>
-        <DetailBody>{details?.body}</DetailBody>
+        <DetailBody>
+          <MarkdownRender markdown={details?.body} />
+        </DetailBody>
       </Container>
     </Template>
   );
@@ -95,7 +98,11 @@ const DetailIssueWrapper = styled.div`
   align-items: center;
   border-bottom: 1px solid ${lightTheme.borderColor};
   padding: 1rem;
-  cursor: pointer;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 const IssueInfoBox = styled.div``;
