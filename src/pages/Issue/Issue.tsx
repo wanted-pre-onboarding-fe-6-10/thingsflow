@@ -1,23 +1,27 @@
 import { useIssuesListDispatch, useIssuesListState } from 'pages/IssuesContext';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { issueAxios } from 'api/getIssue';
+import { getIssue } from 'api/getIssue';
 import styled from 'styled-components';
 import IssueList from './IssueList/IssueList';
 import Spinner from 'components/spinner';
+import SelectMenu from 'components/SelectMenu';
+import { Button, SelectChangeEvent, TextField } from '@mui/material';
 
 const Issue = () => {
   const state = useIssuesListState();
   const dispatch = useIssuesListDispatch();
   const loader = useRef<HTMLDivElement>(null);
+  const [sort, setSort] = useState('comments');
+  const [issueState, setIssueState] = useState('open');
+  const [perPage, setPerPage] = useState(30);
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
+  // dropdown으로 선택할 수 있는 기능 추가해보자
   const getIssueList = async () => {
     dispatch({ type: 'GET_ISSUE' });
     try {
-      const res = await issueAxios.get(
-        `${process.env.REACT_APP_BASE_URL}?sort=comments&per_page=10&page=${page}`
-      );
+      const res = await getIssue({ sort, state: issueState, perPage, page });
       setIsLoading(false);
       dispatch({ type: 'GET_ISSUE_SUCCESS', data: [...state.data!, ...res.data] });
     } catch (error) {
@@ -34,10 +38,20 @@ const Issue = () => {
     },
     [state]
   );
+  const selectSort = (e: SelectChangeEvent) => {
+    e.preventDefault();
+    setSort(e.target.value);
+  };
 
+  const selectState = (e: SelectChangeEvent) => {
+    e.preventDefault();
+    setIssueState(e.target.value);
+  };
+  const onSearch = () => {
+    dispatch({ type: 'GET_ISSUE_SUCCESS', data: [] });
+  };
   useEffect(() => {
     getIssueList();
-    // page 디펜던시 넣기
   }, [page]);
 
   useEffect(() => {
@@ -55,9 +69,48 @@ const Issue = () => {
       ) : (
         <>
           <Title>Angular Issue List</Title>
+          <SelectBox>
+            <SelectMenu
+              title={'sort'}
+              onSelect={selectSort}
+              content={['created', 'updated', 'comments']}
+            />
+            <SelectMenu
+              title={'state'}
+              onSelect={selectState}
+              content={['open', 'closed', 'all']}
+            />
+            <TextField
+              id="outlined-number"
+              label="per_page"
+              type="number"
+              value={perPage}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setPerPage(parseInt(e.target.value))
+              }
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            <TextField
+              id="outlined-number"
+              label="page"
+              type="number"
+              value={page}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setPage(parseInt(e.target.value))
+              }
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            <IssueBtn variant="contained" onClick={onSearch}>
+              검색
+            </IssueBtn>
+          </SelectBox>
           <IssueBox>
             {state.data?.map((v, i) => (
-              <IssueList key={i} index={i} list={v} />
+              <IssueList key={i} index={i} issue={v} />
             ))}
           </IssueBox>
         </>
@@ -83,9 +136,18 @@ export const SpinnerBox = styled.div`
   top: 50%;
   left: 50%;
 `;
+const SelectBox = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem 1rem;
+`;
 const IssueBox = styled.div`
   border-radius: 1rem;
   background-color: ${props => props.theme.subBoxColor};
+`;
+const IssueBtn = styled(Button)`
+  height: 3rem;
 `;
 const LoaderBox = styled.div``;
 const Title = styled.div`

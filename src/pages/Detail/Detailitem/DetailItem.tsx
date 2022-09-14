@@ -1,57 +1,20 @@
-import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { detailDate } from 'utils/getDate';
-import { IssueType } from 'utils/Type';
-import {
-  ListComments,
-  ListCreatedAt,
-  ListID,
-  ListImg,
-  ListImgWrapper,
-  ListItem,
-  ListItemBox,
-  ListItemWrapper,
-  ListNumber,
-  ListNumberWrapper,
-  ListTitle,
-  ListTitleWrapper,
-} from './../../Issue/IssueList/IssueList';
-import MarkDown from './MarDown';
+import { ContentProps } from 'utils/Type';
+import IssueCard, { ListItemBox } from 'components/IssueCard';
 
-interface Props {
-  props: IssueType;
-}
+import MarkDown from './MarkDown';
 
-const DetailItem = ({ props }: Props) => {
-  const [date, setDate] = useState<string>();
-  useEffect(() => {
-    const res = detailDate(props.created_at);
-    setDate(res);
-  }, [props.created_at]);
+const DetailItem = ({ props }: ContentProps) => {
   return (
     <ListItemBox>
-      <ListItemWrapper>
-        <ListImgWrapper>
-          <ListImg src={props.user.avatar_url} />
-        </ListImgWrapper>
-        <ListItem>
-          <ListTitleWrapper>
-            <ListNumber>#{props.number}</ListNumber>
-            <ListTitle>{props.title}</ListTitle>
-            <ListID>{props.user.login}</ListID>
-          </ListTitleWrapper>
-          <ListNumberWrapper>
-            <ListComments>Comment : {props.comments}</ListComments>
-            <ListCreatedAt>{date}</ListCreatedAt>
-          </ListNumberWrapper>
-        </ListItem>
-      </ListItemWrapper>
+      <IssueCard props={props} />
       <BodyWrapper>
         <MarkDown markdown={props.body} />
       </BodyWrapper>
     </ListItemBox>
   );
 };
+
 const BodyWrapper = styled.div`
   border-radius: 1rem;
   margin-top: 1rem;

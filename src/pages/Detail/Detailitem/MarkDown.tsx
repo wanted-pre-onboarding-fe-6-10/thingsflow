@@ -1,10 +1,8 @@
 import ReactMarkdown from 'react-markdown';
 import styled from 'styled-components';
-interface Props {
-  markdown: string;
-}
+import { MarkdownProps } from 'utils/Type';
 
-const MarkDown = ({ markdown }: Props) => {
+const MarkDown = ({ markdown }: MarkdownProps) => {
   return (
     <MarkDownStyle>
       <ReactMarkdown>{markdown}</ReactMarkdown>
@@ -14,7 +12,7 @@ const MarkDown = ({ markdown }: Props) => {
 
 const MarkDownStyle = styled.div`
   font-size: 1rem;
-  line-height: 2.5rem;
+  line-height: 1.5rem;
 `;
 
 export default MarkDown;
