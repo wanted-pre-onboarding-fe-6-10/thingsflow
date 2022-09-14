@@ -3,6 +3,7 @@ import { IssueContext } from './IssueProvider';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { getIssueList } from 'api/api';
+import dateConvert from 'utils/convertStringTodate';
 
 const Issue = () => {
   const nav = useNavigate();
@@ -17,7 +18,7 @@ const Issue = () => {
 
   const getIssues = async (page: number) => {
     const response = await getIssueList(issueURL + page);
-    setIssues(p => [...p, ...response]);
+    setIssues(p => (page === 1 ? [...response] : [...p, ...response]));
     setLoading(true);
   };
 
@@ -49,7 +50,7 @@ const Issue = () => {
                   #{issue.number} {issue.title}
                 </IssueTitle>
                 <>
-                  작성자: {issue.user.login}, 작성일: {issue.created_at}
+                  작성자: {issue.user.login}, 작성일: {dateConvert(issue.created_at)}
                 </>
               </Wrapper>
               <Comments>{issue.comments}</Comments>
