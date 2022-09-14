@@ -1,30 +1,71 @@
-import { getIssues } from 'api/IssueService2';
+import Detail from 'pages/Detail/Detail';
 import { useState } from 'react';
-import { useEffect } from 'react';
+import { useCallback } from 'react';
+import { useRef } from 'react';
+import useIssueSearch from 'hooks/useIssueSearch';
+
 import styled from 'styled-components';
 import IssueItem from './IssueItem';
+import { useIssue } from 'context/IssueContext';
+import Spinner from 'components/Spinner';
+import { useEffect } from 'react';
 
 const IssueList = () => {
-  // const { issues } = useIssue();
-  const [issues, setIssues] = useState([]);
+  const [pageNumber, setPageNumber] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const fetchIssues = async () => {
-    const response = await getIssues(1);
-    setIssues(response.data);
-  };
+  //TODO useContext()로 대체
+  const { issuess } = useIssue();
+
+  const [focusedIssue, setFocusedIssue] = useState();
+
+  const { issues, hasMore, loading, error } = useIssueSearch({ query: '', pageNumber });
+
+  const observer = useRef<any>();
+
+  const lastIssueElementRef = useCallback(
+    (node: any) => {
+      if (loading) return;
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting && hasMore) {
+          setPageNumber(prev => prev + 1);
+        }
+      });
+      if (node) observer.current.observe(node);
+    },
+    [loading, hasMore]
+  );
 
   useEffect(() => {
-    fetchIssues();
-  }, []);
+    // TODO Delete: 시연용
+    setInterval(() => console.log(''), 10000);
+
+    setIsLoading(loading);
+  }, [loading]);
 
   return (
     <Box>
-      {issues.map((item, idx) => (
-        <>
-          <IssueItem key={idx} issue={item} />
-          {idx === 4 ? <Banner src="/띵스플로우.png" /> : null}
-        </>
-      ))}
+      <ListWrapper>
+        {issues.map((item, idx) => (
+          <IssueItemWrapper key={idx}>
+            <IssueItem issue={item} setFocusedIssue={setFocusedIssue} />
+            {issues.length === idx + 1 ? <div ref={lastIssueElementRef} /> : null}
+            {idx === 4 ? (
+              <Banner href="https://thingsflow.com/ko/home">
+                <BannerImg src="/띵스플로우.png" />
+              </Banner>
+            ) : null}
+          </IssueItemWrapper>
+        ))}
+        {isLoading && <Spinner />}
+      </ListWrapper>
+
+      {focusedIssue && (
+        <DetailWrapper>
+          <Detail issueNumber={focusedIssue} />
+        </DetailWrapper>
+      )}
     </Box>
   );
 };
@@ -32,9 +73,25 @@ const IssueList = () => {
 const Box = styled.div`
   display: grid;
   width: 100%;
+  grid-template-columns: 1fr 1fr;
+
+  @media screen and (max-width: 620px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
-const Banner = styled.img`
+const ListWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+`;
+const IssueItemWrapper = styled.div``;
+
+const DetailWrapper = styled.div``;
+
+const Banner = styled.a``;
+
+const BannerImg = styled.img`
   object-fit: contain;
   width: 100%;
   max-height: 100px;
