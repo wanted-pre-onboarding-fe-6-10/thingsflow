@@ -1,19 +1,20 @@
-import { useState } from 'react';
 import styled from 'styled-components';
 import IssueList from './IssueList/IssueList';
+import IssueRepo from './IssueRepo/IssueRepo';
 
 const Issue = () => {
   return (
     <Container>
+      <IssueRepo />
       <IssueList />
     </Container>
   );
 };
 
 const Container = styled.div`
-  width: 100%;
-  min-height: 100vh;
-  background-color: ${props => props.theme.bgColor};
+  height: 100vh;
+  padding: 2rem;
+  background-color: ${props => props.theme.subBgColor};
 `;
 
 export default Issue;
