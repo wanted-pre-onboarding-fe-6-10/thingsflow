@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 
 const Loading = () => {
-  return <Container />;
+  return (
+    <Container>
+      <img src="띵스플로우.png" alt="logo" />
+    </Container>
+  );
 };
 
 export default Loading;
@@ -17,4 +21,9 @@ const Container = styled.div`
   top: 0;
   z-index: 10000;
   background-color: rgba(0, 0, 0, 0.7);
+
+  img {
+    width: 100px;
+    height: 100px;
+  }
 `;
