@@ -1,5 +1,12 @@
+import IssueProvider from 'pages/Issue/IssueProvider';
+import Router from './Router';
+
 function App() {
-  return <>App.tsx</>;
+  return (
+    <IssueProvider>
+      <Router />
+    </IssueProvider>
+  );
 }
 
 export default App;
