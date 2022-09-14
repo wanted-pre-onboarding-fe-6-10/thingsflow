@@ -31,7 +31,7 @@ const Issue = () => {
         setPage(prev => prev + 1);
       }
     },
-    [state.data]
+    [state]
   );
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const Issue = () => {
     const observer = new IntersectionObserver(handleObserver, option);
     if (loader.current) observer.observe(loader.current);
   }, [handleObserver]);
-  console.log(state.data);
+
   return (
     <Container>
       {isLoading ? (

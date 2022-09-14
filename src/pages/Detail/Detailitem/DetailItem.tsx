@@ -58,6 +58,5 @@ const BodyWrapper = styled.div`
   padding: 1rem;
   background-color: ${props => props.theme.bgColor};
 `;
-const Body = styled.div``;
 
 export default DetailItem;
