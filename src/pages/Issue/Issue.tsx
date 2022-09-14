@@ -4,7 +4,7 @@ import IssueList from './IssueList';
 import { getGithubIssues } from 'api/gitAPI';
 import { useEffect, useState } from 'react';
 import Loading from 'components/Loading';
-import { useIssueDispatch, useIssueState } from 'utils/SampleContext';
+import { useIssueDispatch, useIssueState } from 'utils/IssueContext';
 
 const Issue = () => {
   const [page, setPage] = useState(1);
@@ -24,12 +24,14 @@ const Issue = () => {
 
   useEffect(() => {
     const getRandomImageThenSet = async () => {
+      setLoading(true);
       try {
         const res = await getGithubIssues(page);
-        dispatch({ type: 'SET_ISSUE', issue: res });
+        dispatch({ type: 'SET_ISSUE', issue: state.issue.concat(res) });
       } catch {
         console.error('fetching error');
       }
+      setLoading(false);
     };
     getRandomImageThenSet();
   }, [page, dispatch]);
@@ -47,7 +49,8 @@ const Issue = () => {
       {loading ? (
         <Loading />
       ) : (
-        state.issue && state?.issue.map((issue, idx) => <IssueList key={idx} issue={issue} />)
+        state.issue &&
+        state?.issue.map((issue, idx) => <IssueList key={idx} index={idx} issue={issue} />)
       )}
     </Template>
   );
