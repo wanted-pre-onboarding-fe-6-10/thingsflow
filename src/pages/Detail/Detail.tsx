@@ -1,5 +1,6 @@
 import { getIssueDetail } from 'api/IssueService2';
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { IssueType } from 'src/types/IssueType';
 import styled from 'styled-components';
 import { formatDate } from 'utils/dateFormat';
@@ -10,44 +11,53 @@ type DetailType = {
   issueNumber: number;
 };
 
-const Detail = ({ issueNumber }: DetailType) => {
+// const Detail = ({ issueNumber }: DetailType) => {
+const Detail = () => {
   const [issue, setIssue] = useState<IssueType>();
+  const { number } = useParams();
 
-  const fetchDetail = async () => {
+  const fetchDetail = async (issueNumber: number) => {
     const response = await getIssueDetail(issueNumber);
     if (response) setIssue(response.data);
   };
 
   useEffect(() => {
-    fetchDetail();
-  }, [issueNumber]);
+    if (number) fetchDetail(parseInt(number));
+  }, [number]);
 
   return (
-    <Box>
+    <Container>
       {issue && (
-        <>
+        <Box>
           <Wrapper>
-            <Avatar src={issue.user.avatar_url} />
-            <Column>
-              <Row>
-                #{issue.number} {issue.title}
-              </Row>
-              <Row>
-                작성자: {issue.user.login}, 작성일: {formatDate(issue.created_at)}
-              </Row>
-            </Column>
+            <Avatar src={issue.user.avatar_url} />#{issue.number} {issue.title}
+            <Row>
+              작성자: {issue.user.login} / 작성일: {formatDate(issue.created_at)}
+            </Row>
             <Comment>코멘트: {issue.comments}</Comment>
           </Wrapper>
           <Body dangerouslySetInnerHTML={parseMarkdown(issue.body)} />
-        </>
+        </Box>
       )}
-    </Box>
+    </Container>
   );
 };
 
-const Box = styled.div`
+const Container = styled.div`
   width: 100%;
+  height: 100vh;
+  display: flex;
   justify-content: center;
+  padding: 2rem 0;
+  background-color: ${props => props.theme.subBgColor};
+`;
+
+const Box = styled.div`
+  max-width: 600px;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  background-color: ${props => props.theme.bgColor};
 `;
 
 const Wrapper = styled.div`
@@ -57,15 +67,6 @@ const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 1em;
-  cursor: pointer;
-
-  & + & {
-    border-top: 0.1em ${props => props.theme.borderColor} solid;
-  }
-
-  :hover {
-    background-color: ${props => props.theme.subBgColor};
-  }
 `;
 
 const Column = styled.div`
@@ -79,6 +80,7 @@ const Description = styled.div``;
 const Avatar = styled.img`
   width: 4em;
   border-radius: 100%;
+  margin-right: 1rem;
 `;
 
 const Comment = styled.div``;
