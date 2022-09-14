@@ -36,6 +36,7 @@ const Issue = () => {
 
   useEffect(() => {
     getRequest();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <IssueItem />;
