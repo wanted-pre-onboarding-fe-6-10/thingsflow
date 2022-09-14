@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { getIssueList } from 'api/api';
 import dateConvert from 'utils/convertStringTodate';
+import IssueBox from './IssueBox';
 
 const Issue = () => {
   const nav = useNavigate();
@@ -40,24 +41,7 @@ const Issue = () => {
 
   return (
     <IssueContainer>
-      {issues.map((issue, index: number) => {
-        return (
-          <div key={issue.id}>
-            <div>{index === 4 && <h1>image</h1>}</div>
-            <IssueBox onClick={() => nav(`/${issue.number}`)}>
-              <Wrapper>
-                <IssueTitle>
-                  #{issue.number} {issue.title}
-                </IssueTitle>
-                <>
-                  작성자: {issue.user.login}, 작성일: {dateConvert(issue.created_at)}
-                </>
-              </Wrapper>
-              <Comments>{issue.comments}</Comments>
-            </IssueBox>
-          </div>
-        );
-      })}
+      <IssueBox />
       <div ref={observerRef}>Loding...</div>
     </IssueContainer>
   );
@@ -66,19 +50,3 @@ const Issue = () => {
 export default Issue;
 
 const IssueContainer = styled.div``;
-const IssueBox = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 1rem;
-  border: 1px solid black;
-  width: 50%;
-`;
-
-const Comments = styled.p`
-  margin: 1rem 2rem;
-`;
-const IssueTitle = styled.h4``;
-const Wrapper = styled.div`
-  margin: 0 1rem;
-`;
