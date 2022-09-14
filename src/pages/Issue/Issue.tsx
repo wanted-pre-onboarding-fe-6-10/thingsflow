@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { issueAxios } from 'api/getIssue';
 import styled from 'styled-components';
 import IssueList from './IssueList/IssueList';
+import Spinner from 'components/spinner';
 
 const Issue = () => {
   const state = useIssuesListState();
@@ -48,7 +49,9 @@ const Issue = () => {
   return (
     <Container>
       {isLoading ? (
-        <>이슈를 받아오는 중입니다.</>
+        <SpinnerBox>
+          <Spinner />
+        </SpinnerBox>
       ) : (
         <>
           <Title>Angular Issue List</Title>
@@ -60,7 +63,11 @@ const Issue = () => {
         </>
       )}
       {!state.isLoading && <LoaderBox ref={loader}></LoaderBox>}
-      {!isLoading && state.isLoading && <>다음 이슈를 받아오는 중입니다.</>}
+      {!isLoading && state.isLoading && (
+        <SpinnerBox>
+          <Spinner />
+        </SpinnerBox>
+      )}
     </Container>
   );
 };
@@ -70,6 +77,11 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+`;
+export const SpinnerBox = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
 `;
 const IssueBox = styled.div`
   border-radius: 1rem;

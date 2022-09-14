@@ -1,5 +1,6 @@
 import { issueAxios } from 'api/getIssue';
-import { Container } from 'pages/Issue/Issue';
+import Spinner from 'components/spinner';
+import { Container, SpinnerBox } from 'pages/Issue/Issue';
 import { useIssueDispatch, useIssueState } from 'pages/IssuesContext';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
@@ -27,7 +28,9 @@ const Detail = () => {
   return (
     <DetailContainer>
       {state.isLoading ? (
-        <>이슈를 받아오는 중입니다.</>
+        <SpinnerBox>
+          <Spinner />
+        </SpinnerBox>
       ) : (
         <>
           <DetailItem props={state.data![0]} />
