@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext, useState } from 'react';
 
-export const IssueContext = createContext(null);
+export const IssueContext = createContext({ issuess: [] });
 
 export const useIssue = () => useContext(IssueContext);
 
@@ -12,7 +12,7 @@ export function IssueProvider({ issueService, children }: any) {
   }, [issueService]);
 
   const value: any = {
-    issues,
+    issuess: issues,
   };
 
   return <IssueContext.Provider value={value}>{children}</IssueContext.Provider>;
