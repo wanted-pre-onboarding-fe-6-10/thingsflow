@@ -10,9 +10,9 @@ const instance: AxiosInstance = axios.create({
   },
 });
 
-export const getIssueList = async () => {
+export const getIssueList = async (url: string) => {
   try {
-    const { data } = await instance.get('/issues?state=open&sort=comments');
+    const { data } = await instance.get(url);
     return data;
   } catch {
     console.error('error');
