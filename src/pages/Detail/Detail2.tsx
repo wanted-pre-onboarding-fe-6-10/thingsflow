@@ -1,6 +1,5 @@
 import { getIssueDetail } from 'api/IssueService2';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import { IssueType } from 'src/types/IssueType';
 import styled from 'styled-components';
 import { formatDate } from 'utils/dateFormat';
@@ -11,19 +10,17 @@ type DetailType = {
   issueNumber: number;
 };
 
-// const Detail = ({ issueNumber }: DetailType) => {
-const Detail = () => {
+const Detail = ({ issueNumber }: DetailType) => {
   const [issue, setIssue] = useState<IssueType>();
-  const { number } = useParams();
 
-  const fetchDetail = async (issueNumber: number) => {
+  const fetchDetail = async () => {
     const response = await getIssueDetail(issueNumber);
     if (response) setIssue(response.data);
   };
 
   useEffect(() => {
-    if (number) fetchDetail(parseInt(number));
-  }, [number]);
+    fetchDetail();
+  }, [issueNumber]);
 
   return (
     <Container>
