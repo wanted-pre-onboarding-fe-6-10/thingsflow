@@ -1,4 +1,4 @@
-import instance from 'api/axios.development';
+import instance from 'api/axios';
 import IssueService from 'api/IssueService';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from 'styles/GlobalStyle';
