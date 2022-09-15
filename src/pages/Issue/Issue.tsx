@@ -1,47 +1,78 @@
-import axios from 'axios';
-import { useContext, useEffect, useState } from 'react';
-import { IssueDataType } from '../../AppContext';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useContext, useEffect, useState, useRef } from 'react';
 import AppContext from '../../AppContext';
-import IssueItem from './IssueItem/IssueItem';
+import IssueItem from 'pages/Issue/IssueItem/IssueItem';
 import Loading from 'components/Loading';
+import { getIssueList } from 'api/issueApi';
+
+let pageNum = 1;
 
 const Issue = () => {
-  const BASE_URL = process.env.REACT_APP_BASE_URL;
-  const API_KEY = process.env.REACT_APP_ACCESS_TOKEN;
-
   const appContext = useContext(AppContext);
+  const { setIssueListData } = appContext;
 
+  const isScroll = useRef(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  const getRequest = async () => {
-    const response = await axios({ url: BASE_URL, headers: { Authorization: `${API_KEY}` } });
+  const getRequest = async (pageNum: number) => {
+    const response = await getIssueList({
+      page: pageNum,
+      per_page: 10,
+      state: 'open',
+      sort: 'comments',
+    });
 
     if (response.status === 200) {
       setTimeout(() => {
         setIsLoading(false);
-      }, 500);
 
-      const openData = response.data.filter((data: IssueDataType) => data.state === 'open');
+        if (pageNum === 1) {
+          const ad = { type: 'ad', id: Date.now() };
+          response.data.splice(4, 0, ad);
+        }
 
-      type sortTpye = { comments: number };
-
-      const SortedData = openData.sort((a: sortTpye, b: sortTpye) =>
-        a.comments > b.comments ? -1 : 1
-      );
-
-      const ad = { type: 'ad', id: Date.now() };
-      SortedData.splice(4, 0, ad);
-
-      appContext.setIssueListData(SortedData);
+        setIssueListData(prev => [...prev, ...response.data]);
+      }, 1000);
     }
   };
 
   useEffect(() => {
-    getRequest();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (pageNum !== 1) {
+      return;
+    }
+    getRequest(pageNum);
+    pageNum += 1;
   }, []);
 
-  return <div>{isLoading ? <Loading /> : <IssueItem />}</div>;
+  const handleScroll = () => {
+    const scrollHeight = document.documentElement.scrollHeight;
+
+    if (isScroll.current === false && window.innerHeight + window.scrollY >= scrollHeight - 50) {
+      isScroll.current = true;
+      pageNum += 1;
+
+      getRequest(pageNum);
+    }
+
+    setTimeout(() => {
+      isScroll.current = false;
+      setIsLoading(true);
+    }, 500);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  return (
+    <div>
+      <IssueItem />
+      <div style={{ height: '8rem' }}>{isLoading && <Loading />}</div>
+    </div>
+  );
 };
 
 export default Issue;

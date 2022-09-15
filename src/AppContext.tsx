@@ -1,5 +1,13 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import React, { Dispatch, SetStateAction } from 'react';
+
+const AppContext = React.createContext<IssueListType>({
+  issueListData: [],
+  setIssueListData: () => {},
+});
+
+export default AppContext;
+
 interface User {
   login: string;
   id: number;
@@ -121,10 +129,3 @@ interface IssueListType {
   issueListData: IssueDataType[];
   setIssueListData: Dispatch<SetStateAction<IssueDataType[]>>;
 }
-
-const AppContext = React.createContext<IssueListType>({
-  issueListData: [],
-  setIssueListData: () => {},
-});
-
-export default AppContext;
