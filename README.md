@@ -47,8 +47,32 @@ http://wanted610.s3-website.ap-northeast-2.amazonaws.com/
 
 > ## 프로젝트 개요
 
-- 예시
-  <br>
+- Angular-cli 레포지토리의 issue를 보여주는 App
+
+> ## 사용기술
+
+ <br/>
+
+<img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=white">
+<img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=white">
+<img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white">
+<img src="https://img.shields.io/badge/styled-components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white">
+
+<br>
+
+> ### 해당 기술 선택이유<br>
+
+- React
+
+  - 생태계가 넓고, 다양한 라이브러리 사용 가능
+  - virtual DOM을 활용하여 빠른 렌더링 가능
+  - 단방향 데이터 바인딩을 통한 디버깅 용이
+
+- typescript : 명시적인 정적 타입 지정을 통해 컴파일 단계에서 오류를 미리 감지할 수 있다.
+
+- Styled-component : css를 컴포넌트화 하여 사용할 수 있다.
+
+<br/>
 
 > ## 폴더 구조
 
@@ -130,9 +154,9 @@ http://wanted610.s3-website.ap-northeast-2.amazonaws.com/
 
 > ## Git
 
-- ### [Git branch 전략](https://github.com/wanted-pre-onboarding-fe-6-10/I.M.LAB/wiki/Git-branch-%EC%A0%84%EB%9E%B5)
+- ### [Git branch 전략](https://github.com/wanted-pre-onboarding-fe-6-10/thingsflow/wiki/Git-branch-%EC%A0%84%EB%9E%B5)
 
-- ### [커밋 컨벤션](https://github.com/wanted-pre-onboarding-fe-6-10/I.M.LAB/wiki/%EC%BB%A4%EB%B0%8B-%EC%BB%A8%EB%B2%A4%EC%85%98)
+- ### [커밋 컨벤션](https://github.com/wanted-pre-onboarding-fe-6-10/thingsflow/wiki/Git-branch-%EC%A0%84%EB%9E%B5)
 
 <br>
 
@@ -189,15 +213,17 @@ http://wanted610.s3-website.ap-northeast-2.amazonaws.com/
 
 ### 윤관
 
--
+- Github Rest API를 활용해보면서 정말 다양한 기능들이 있고 API를 통해서 깃을 활용할 수 있다는 점을 알 수 있었다.
+- Issue List와 Detail 페이지를 구성하면서 검색기능이 있으면 좋지 않을까 해서 상태별 검색 기능을 추가했는데 추가적으로 Rest API Docs를 보면서 특정 사람의 repository를 검색해서 그 해당 repository의 이슈를 받아올 수 있는 기능이 있으면 이 서비스의 기능이 훨씬 더 사용자 친화적으로 개선될 것 같다는 생각을 했다. 여유가 된다면 이 기능은 추가해보고 싶다.
 
 ### 김한얼
 
--
+- Typescript와 ContextAPI를 연계해서 활용하는데 많은 에러와 시행착오를 겪었는데, 이를 통해 한층 더 Typescript에 대한 이해도를 많이 높일 수 있었다.
+- reducer를 통한 dispatch로 state 관리를 하려고 했는데 그 부분이 많이 어려워서 추가적인 학습을 진행할 예정이다.
 
 ### 박진성
 
--
+- Typescript를 처음 사용해봤는데 정말 러닝 커브가 높은 언어인 것 같다. 하지만, 타입지정을 통해 미리미리 디버깅을 할 수 있고 규모가 커질수록 활용도가 높을거란 기대가 된다.
 
 ### 신이재
 
@@ -209,12 +235,22 @@ http://wanted610.s3-website.ap-northeast-2.amazonaws.com/
 
 ### 전지현
 
--
+1.  api 명세서 충분한 숙지 부족<br/>
+    api 명세서를 잘 파악하지 못한 채 진행을 해서 나중에 코드를 많이 수정해야 했다.<br/>
+    앞으로는 사용하기 전에 어떤 api 요청을 할 수 있는지 등을 먼저 파악한 후 진행해야 할 것이다.
+
+    <br/>
+
+2.  동료학습을 통한 사고 확장<br/>
+    무한스크롤 구현 방법이 내가 알고 있던 방법뿐 아니라 여러 방법이 있었다. <br/>
+    나의 사고에만 갇혀있지 않기 위해 코드를 공유하는 것에 대한 중요성을 느꼈다.
 
 ### 정재욱
 
--
+- 타입스크립트를 사용하면서 기존의 자바스크립트로 진행했던 것보다 고려해야 할 사항이 많아서 시간이 오래 걸렸음
+- 직접 프로젝트에 적용해 보니 타입스크립트에 대해서 더 자세히 알게 되었다.
 
 ### 추승연
 
--
+- 타입스크립트를 학습하고 처음 진행하는 프로젝트라 타입 관련하여 이슈가 많았다. 동일한 프로젝트를 자바스크립트로 진행했다면 작업 시간은 더 빨랐겠지만 학습이라는 의미에서 이번 프로젝트를 통해 습득한게 많은 것 같다.
+- context API의 경우 활용에 익숙해지면 다음 프로젝트 진행에 많은 도움이 될 것 같다.
