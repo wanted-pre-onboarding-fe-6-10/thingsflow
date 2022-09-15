@@ -1,10 +1,11 @@
 import ReactMarkdown from 'react-markdown';
 import styled from 'styled-components';
 import { MarkdownProps } from 'utils/Type';
+import '../../../../node_modules/github-markdown-css/github-markdown-light.css';
 
 const MarkDown = ({ markdown }: MarkdownProps) => {
   return (
-    <MarkDownStyle>
+    <MarkDownStyle className="markdown-body">
       <ReactMarkdown>{markdown}</ReactMarkdown>
     </MarkDownStyle>
   );

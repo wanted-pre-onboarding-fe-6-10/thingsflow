@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { ContentProps } from 'utils/Type';
 import IssueCard, { ListItemBox } from 'components/IssueCard';
-
 import MarkDown from './MarkDown';
 
 const DetailItem = ({ props }: ContentProps) => {
