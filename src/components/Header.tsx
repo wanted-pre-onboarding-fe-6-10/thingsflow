@@ -13,6 +13,8 @@ const HeaderBox = styled.div`
   font-weight: bold;
   padding: 2rem;
   border-bottom: 1px solid #cfcfcf;
+  cursor: pointer;
+
   @media screen and (max-width: 950px) {
     font-size: 1.5rem;
   }

@@ -44,9 +44,13 @@ export default IssueBox;
 
 const Container = styled.div`
   background-color: #eeeeee;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 const Box = styled.div`
   display: flex;
+  width: 80%;
   flex-direction: column;
   align-items: center;
 `;
@@ -58,8 +62,12 @@ const TitleBox = styled.p`
   font-weight: bold;
 `;
 
-const Title = styled.span``;
-const InfoText = styled.span``;
+const Title = styled.span`
+  margin-right: 1rem;
+`;
+const InfoText = styled.span`
+  margin-right: 1rem;
+`;
 
 const SubInfo = styled.p`
   font-size: 0.8rem;
@@ -84,6 +92,7 @@ const AdBox = styled.a`
 `;
 
 const Comments = styled.p`
+  font-size: 0.8rem;
   margin: 1rem;
   display: flex;
   align-items: center;
