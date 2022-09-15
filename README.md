@@ -53,15 +53,71 @@ http://wanted610.s3-website.ap-northeast-2.amazonaws.com/
 > ## 폴더 구조
 
 ```
-폴더구조 자리
+📦src
+ ┣ 📂api
+ ┃ ┣ 📜IssueService.tsx
+ ┃ ┣ 📜axios.development.ts
+ ┃ ┗ 📜axios.js
+ ┣ 📂components
+ ┃ ┗ 📜Spinner.tsx
+ ┣ 📂context
+ ┃ ┗ 📜IssueContext.tsx
+ ┣ 📂hooks
+ ┃ ┗ 📜useIssueSearch.ts
+ ┣ 📂pages
+ ┃ ┣ 📂Detail
+ ┃ ┃ ┣ 📜Detail.tsx
+ ┃ ┃ ┗ 📜Detail2.tsx
+ ┃ ┣ 📂Error
+ ┃ ┃ ┗ 📜Error.tsx
+ ┃ ┗ 📂Issue
+ ┃ ┃ ┣ 📂IssueList
+ ┃ ┃ ┃ ┣ 📜IssueItem.tsx
+ ┃ ┃ ┃ ┗ 📜IssueList.tsx
+ ┃ ┃ ┣ 📂IssueRepo
+ ┃ ┃ ┃ ┣ 📜IssueRepo.tsx
+ ┃ ┃ ┃ ┗ 📜IssueRepoInput.tsx
+ ┃ ┃ ┗ 📜Issue.tsx
+ ┣ 📂store
+ ┃ ┗ 📜.gitkeep
+ ┣ 📂styles
+ ┃ ┣ 📜GlobalStyle.jsx
+ ┃ ┗ 📜theme.js
+ ┣ 📂types
+ ┃ ┗ 📜IssueType.ts
+ ┣ 📂utils
+ ┃ ┣ 📜dateFormat.ts
+ ┃ ┣ 📜markdownParser.ts
+ ┃ ┗ 📜parsemd.js
+ ┣ 📜App.tsx
+ ┣ 📜Router.tsx
+ ┗ 📜index.tsx
 ```
 
 > ## 기능별 설명 / Best Practice
 
   <details>
-    <summary>1. 예시</summary>
+    <summary>1. Issue 목록</summary>
 
-    여기에 내용 입력합니다.
+- 이슈 목록 context API를 활용하여 불러오기
+- 이슈 목록은 open 상태, comment 많은 순으로 query param에 넣어 요청
+- 이슈 목록에 인피니트 스크롤 및 로딩 시 Spinner 적용
+  - 인피니트 스크롤의 경우에는 custom hook으로 정의 + context와 연결
+- 화면 너비에 따른 이슈 목록 반응형 UI 적용 (미완성)
+- 이슈 목록에 광고 적용
+- 이슈 목록 상에서 이슈를 클릭하면 선택한 아이템의 강조 표현 처리
+- 추가 기능으로 repository를 변경할 수 있도록 하는 기능 작업 시도 (미완성)
+- 반응형 UI 적용
+
+<img width="25%" alt="Screen Shot 2022-09-15 at 10 06 45 AM" src="https://user-images.githubusercontent.com/96093461/190289505-dc398514-257e-41aa-b26c-c095fb6da75a.png">
+ <img width="70%" alt="Screen Shot 2022-09-15 at 10 03 03 AM" src="https://user-images.githubusercontent.com/96093461/190289113-75aad059-d7cf-4bf9-9355-0b21ca9fa10f.png">
+
+  </details>
+<details>
+    <summary>2. Issue 상세</summary>
+    
+- 이슈 본문 markdown 형태를 정규식으로 parsing하여 컴포넌트에 innerHTML으로 넣어줌
+  - 추후 HoC로 분리할 예정
 
   </details>
 
@@ -69,7 +125,8 @@ http://wanted610.s3-website.ap-northeast-2.amazonaws.com/
 
 > ## 미구현 내용
 
-- 예시
+- 에러 처리 페이지
+- 추가 기능으로 repository를 변경할 수 있도록 하는 기능 작업 시도 (미완성)
 
 > ## Git
 
@@ -144,7 +201,11 @@ http://wanted610.s3-website.ap-northeast-2.amazonaws.com/
 
 ### 신이재
 
--
+- Context API를 활용하여 context 관리를 시도해볼 수 있어서 좋았습니다. API로 받아온 데이터를 전역 context에서 관리하도록 설계하여 컴포넌트 간의 prop 전달 부분이 정리가 되었습니다.
+- 무한 스크롤과 페이징 처리하는 부분을 별도의 custom hook으로 분리한 뒤, context에서 관리하도록 설계하였습니다.
+- http client와 service 모듈을 분리한 뒤 service 모듈에서 http client 인스턴스를 주입하는 방식으로 구현하여 의존성 주입을 시도해보았는데, API 호출 및 응답 데이터를 관리하는 context 클래스와 관심사 분리가 완벽하게 되지 않아 설계가 조금 꼬여서 아쉬웠습니다.
+
+    <img width="1892" alt="Screen Shot 2022-09-15 at 10 03 03 AM" src="https://user-images.githubusercontent.com/96093461/190289113-75aad059-d7cf-4bf9-9355-0b21ca9fa10f.png">
 
 ### 전지현
 
