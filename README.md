@@ -82,9 +82,33 @@ http://wanted610.s3-website.ap-northeast-2.amazonaws.com/
     - 이미지 클릭시 띵스플로우 홈페이지로 이동
 
   </details>
-  
-    <details>
-    <summary>1. 이슈 목록 화면</summary>
+
+<br>
+
+  <details>
+    <summary>2. 이슈 상세 화면</summary>
+
+    1. 이슈 상세 화면 이동
+    - 이슈 목록 화면에서 이슈 클릭 시 해당 이슈의 number 값을 Param으로 전달
+    - 해당 number 값을 useParam으로 전달받아 상세 이슈 api 재호출
+
+    2. 본문 표시 위해
+    - markdown 라이브러리 사용하여 본문 내용 표시
+    - github-markdown-css 사용하여 스타일링
+
+  </details>
+
+<br>
+
+<br>
+
+  <details>
+    <summary>3. 기타</summary>
+
+    1. 반응형 UI 적용
+    - styled component에서 스크린 값에 따른 UI 변경 구현
+
+    2. converDate 함수 모듈화 통해 이슈 작성일 변환
 
   </details>
 
@@ -179,4 +203,5 @@ http://wanted610.s3-website.ap-northeast-2.amazonaws.com/
 
 ### 추승연
 
--
+- 타입스크립트를 학습하고 처음 진행하는 프로젝트라 타입 관련하여 이슈가 많았다. 동일한 프로젝트를 자바스크립트로 진행했다면 작업 시간은 더 빨랐겠지만 학습이라는 의미에서 이번 프로젝트를 통해 습득한게 많은 것 같다.
+- context API의 경우 활용에 익숙해지면 다음 프로젝트 진행에 많은 도움이 될 것 같다.
