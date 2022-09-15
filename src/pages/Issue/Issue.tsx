@@ -23,7 +23,7 @@ const Issue = () => {
   };
 
   useEffect(() => {
-    const getRandomImageThenSet = async () => {
+    const getIssuesSet = async () => {
       setLoading(true);
       try {
         const res = await getGithubIssues(page);
@@ -33,7 +33,7 @@ const Issue = () => {
       }
       setLoading(false);
     };
-    getRandomImageThenSet();
+    getIssuesSet();
   }, [page, dispatch]);
 
   useEffect(() => {
