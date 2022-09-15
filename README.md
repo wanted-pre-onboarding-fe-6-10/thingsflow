@@ -48,13 +48,14 @@ http://wanted610.s3-website.ap-northeast-2.amazonaws.com/
 > ## 프로젝트 개요
 
 - 예시
-  <br>
+- 사용기술
 
  <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=white">
  <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=white">
   <img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white">
    <img src="https://img.shields.io/badge/styled-components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white">
-  <br/>
+ 
+<br/>
 
 > ## 폴더 구조
 
@@ -136,30 +137,11 @@ http://wanted610.s3-website.ap-northeast-2.amazonaws.com/
 
 > ## 회고
 
-### 윤관
-
--
-
-### 김한얼
-
--
-
-### 박진성
-
--
-
-### 신이재
-
--
-
 ### 전지현
 
--
-
-### 정재욱
-
--
-
-### 추승연
-
--
+1.  api 명세서 충분한 숙지 부족<br/>
+    api 명세서를 잘 파악하지 못한 채 진행을 해서 나중에 코드를 많이 수정해야 했다.<br/>
+    앞으로는 사용하기 전에 어떤 api 요청을 할 수 있는지 등을 먼저 파악한 후 진행해야 할 것이다.
+2.  동료학습을 통한 사고 확장<br/>
+    무한스크롤 구현 방법이 내가 알고 있던 방법뿐 아니라 여러 방법이 있었다. <br/>
+    나의 사고에만 갇혀있지 않기 위해 코드를 공유하는 것에 대한 중요성을 느꼈다.
