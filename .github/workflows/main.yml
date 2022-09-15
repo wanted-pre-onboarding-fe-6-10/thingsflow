@@ -21,13 +21,13 @@ jobs:
             ${{ runner.OS }}-
 
       - name: Generate Environment Variables File for Production
-        run: | 
-        echo "REACT_APP_BASE_URL=$REACT_APP_BASE_URL" >> .env.production 
-      env: REACT_APP_BASE_URL: ${{ secrets.REACT_APP_BASE_URL }}
+        run: echo "REACT_APP_BASE_URL=$REACT_APP_BASE_URL" >> .env
+        env:
+          REACT_APP_BASE_URL: ${{ secrets.REACT_APP_BASE_URL }}
 
       - name: Install Dependencies
         run: yarn install
-          
+
       - name: Build
         run: yarn build
         env:
