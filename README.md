@@ -62,7 +62,29 @@ http://wanted610.s3-website.ap-northeast-2.amazonaws.com/
     <summary>1. 이슈 목록 화면</summary>
 
     1. API 호출
-     -
+    - git hub 이슈 목록 가져오기 API 활용
+    - api 호출 시 parameter 값으로 sort=comments & state=open 전달하여 open 상태의 이슈 중 코멘트가 많은 순으로 정렬
+    - src/api 폴더 내 api.tsx -> axios instance 생성하여 모듈화 후 각 컴포넌트에서 api 호출 시 활용
+
+    2. Infinite scroll 구현
+    - IntersectionObserver API 활용하여 이슈 목록 화면 내의 무한 스크롤 동작 구현 : scroll event를 활용 대비 렌더링 최소화
+    - observer 생성 후 미리 지정한 observerRef element가 viwpoint에 들어오면 다음 페이지의 api data 호출
+    - 호출된 데이터들은 useState를 사용하여 저장
+
+    3. context api 활용한 api 연동
+    - Issue page 내 IssueProvider.tsx 컴포넌트에 context api 생성
+    - 생성된 context api를 통해 useState의 state와 setState를 전달
+    - useContext를 통해 Issue.tsx에서는 setState만 IssueBox.tsx에서는 state만 호출하여 기능 구현
+
+    4. 광고 이미지 출력
+    - useContext를 통해 불러온 배열을 map method를 활용하여 구현
+    - map method의 두번째 parameter로 index값을 지정하고 index값이 4일 때 issueBox 위에 이미지 추가
+    - 이미지 클릭시 띵스플로우 홈페이지로 이동
+
+  </details>
+  
+    <details>
+    <summary>1. 이슈 목록 화면</summary>
 
   </details>
 
