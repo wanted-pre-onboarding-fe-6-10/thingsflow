@@ -101,6 +101,7 @@ http://wanted610.s3-website.ap-northeast-2.amazonaws.com/
 ```
 
 > ## 기능별 설명 / Best Practice
+![이슈검색기능](https://user-images.githubusercontent.com/79856086/190293012-4030a638-7f3d-45c9-9759-803de6d97114.PNG)
 
 ### 필수 기능
 
