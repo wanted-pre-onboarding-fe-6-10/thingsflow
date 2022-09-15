@@ -22,7 +22,8 @@ instance.interceptors.response.use(
           alert('API 요청 호출 제한 초과');
           break;
         case 404:
-          history.push('/error');
+          alert('접근 불가한 레포지토리입니다.');
+          // history.push('/error');
           break;
         default:
       }
