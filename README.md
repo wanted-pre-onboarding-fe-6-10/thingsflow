@@ -49,6 +49,25 @@ http://wanted610.s3-website.ap-northeast-2.amazonaws.com/
 
 - Angular-cli 레포지토리의 issue를 보여주는 App
 
+> ## 프로젝트 진행방법
+
+1. 각 팀원은 필수 기능을 구현한 뒤, 중간 회의를 통해 코드 리뷰를 진행했다.
+2. 추가 기능 구현 뒤, Best Practice를 논의한 뒤 선정하여 메인 브랜치에 병합했다.
+
+  <details>
+    <summary>Best Practice 선정 이유</summary>
+
+    - Context API를 사용하는 Custom Hook을 사용해서 분리를 한 점이 좋았다.
+    - 전역으로 사용하는 types을 따로 분리해서 사용성이 좋았다.
+    - 추가 기능(레포지토리 검색을 통한 issue 리스트 확인)이 있다.
+    - UI 완성도가 높고 반응형에 따라 두 가지 컨셉으로 보여준다는 부분이 좋았다.
+    - Custom Hook을 적절하게 활용해서 Infinite scroll도 간단하면서 효율적으로 작업하셨고 Context API를 적재적소에 같이 활용한 부분이 좋았다.
+    - types 분리와 추가 기능에 대한 부분으로 확장성까지 고려한 부분이 좋았다.
+
+  </details>
+
+  <br/>
+
 > ## 사용기술
 
  <br/>
@@ -145,12 +164,21 @@ http://wanted610.s3-website.ap-northeast-2.amazonaws.com/
 
   </details>
 
+<details>
+    <summary>3. 추가 기능</summary>
+    
+- Github API 호출 제한 초과 시 403 에러에 대한 alert 처리
+- 찾을 수 없는 레포지토리에 대한 404 에러에 대한 alert 처리
+- 레포지토리 경로 변경 기능 추가
+<img width="1357" alt="Screen Shot 2022-09-15 at 11 44 52 AM" src="https://user-images.githubusercontent.com/96093461/190301426-370d0865-cdbe-4121-b457-6081ea329e3c.png">
+
+  </details>
 <br>
 
 > ## 미구현 내용
 
-- 에러 처리 페이지
-- 추가 기능으로 repository를 변경할 수 있도록 하는 기능 작업 시도 (미완성)
+- 에러 처리 페이지 UI
+- 모바일 화면에서의 디테일 화면 연결
 
 > ## Git
 
