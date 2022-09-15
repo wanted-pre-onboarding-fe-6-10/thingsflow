@@ -54,7 +54,7 @@ const AdBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: aliceblue;
+  background-color: black;
 `;
 
 const LogoImg = styled.img`

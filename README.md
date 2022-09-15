@@ -1,81 +1,100 @@
 # Wanted Pre-Onboarding 6차 10팀 TenKeyLess, thingsflow 기업과제
 
-## 🌏 배포링크
-
-http://wanted610.s3-website.ap-northeast-2.amazonaws.com/
-
-## 👋 팀원소개
-
-<table>
-    <tr>
-        <td height="140px" align="center"> <a href="https://github.com/HE-SW">
-            <img src="https://avatars.githubusercontent.com/HE-SW" width="140px" /> <br>김한얼</a> <br></td>
-        <td height="140px" align="center"> <a href="https://github.com/eazae">
-            <img src="https://avatars.githubusercontent.com/eazae" width="140px" /> <br>신이재</a> <br></td>
-        <td height="140px" align="center"> <a href="https://github.com/blackgar">
-            <img src="https://avatars.githubusercontent.com/blackgar" width="140px" /> <br>윤관 </a> <br></td>
-        <td height="140px" align="center"> <a href="https://github.com/jihyun-jeon">
-          <img src="https://avatars.githubusercontent.com/jihyun-jeon" width="140px" /> <br> 전지현</a> <br></td>
-        <td height="140px" align="center"> <a href="https://github.com/Dev-jwJeong">
-            <img src="https://avatars.githubusercontent.com/Dev-jwJeong" width="140px" /> <br>정재욱</a> <br></td>
-        <td height="140px" align="center"> <a href="https://github.com/qkrwlstjd">
-            <img src="https://avatars.githubusercontent.com/qkrwlstjd" width="140px" /> <br> 박진성 </a> <br></td>
-        <td height="140px" align="center"> <a href="https://github.com/seungyeonchoo">
-            <img src="https://avatars.githubusercontent.com/seungyeonchoo" width="140px" /> <br> 추승연 </a> <br></td>
-    </tr>
-<tr>
-        <td align="center"></td>
-        <td align="center"></td>
-        <td align="center"></td>
-        <td align="center"></td>
-        <td align="center"></td>
-        <td align="center"></td>
-        <td align="center"></td>
-    </tr>
-</table>
-<br>
-
-> ## 목차
-
-- [프로젝트 개요](#프로젝트-개요)
-- [폴더 구조](#폴더-구조)
-- [기능별 설명 / Best Practice](#기능별-설명--best-practice)
-- [미구현 내용](#미구현-내용)
-- [회고](#회고)
-
 <br>
 
 > ## 프로젝트 개요
+>
+> Angular-cli 레포지토리의 issue를 보여주는 App
 
-- 예시
-  <br>
+<br/>
 
- <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=white">
- <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=white">
-  <img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white">
-   <img src="https://img.shields.io/badge/styled-components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white">
-  <br/>
+> ## 사용기술
+>
+> <br/>
+
+<img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=white">
+<img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=white">
+<img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white">
+<img src="https://img.shields.io/badge/styled-components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white">
+
+<br>
+
+### 해당 기술 선택이유<br>
+
+- React
+
+  - 생태계가 넓고, 다양한 라이브러리 사용 가능
+  - virtual DOM을 활용하여 빠른 렌더링 가능
+  - 단방향 데이터 바인딩을 통한 디버깅 용이
+
+- typescript : 명시적인 정적 타입 지정을 통해 컴파일 단계에서 오류를 미리 감지할 수 있다.
+
+- Styled-component : css를 컴포넌트화 하여 사용할 수 있다.
+
+<br/>
 
 > ## 폴더 구조
 
 ```
-폴더구조 자리
+src
+ ┣ api
+ ┃ ┣ axios.tsx
+ ┃ ┗ issueApi.tsx
+ ┣ components
+ ┃ ┣ Header.tsx
+ ┃ ┣ Loading.tsx
+ ┃ ┗ MarkdownRenderer.tsx
+ ┣ pages
+ ┃ ┣ Detail
+ ┃ ┃ ┗ Detail.tsx
+ ┃ ┣ Error
+ ┃ ┃ ┗ Error.tsx
+ ┃ ┗ Issue
+ ┃ ┃ ┣ IssueItem
+ ┃ ┃ ┃ ┗ IssueItem.tsx
+ ┃ ┃ ┗ Issue.tsx
+ ┣ styles
+ ┃ ┣ GlobalStyle.tsx
+ ┃ ┗ theme.tsx
+ ┣ App.tsx
+ ┣ AppContext.tsx
+ ┣ Router.tsx
+ ┗ index.tsx
 ```
 
 > ## 기능별 설명 / Best Practice
 
-  <details>
-    <summary>1. 예시</summary>
+### Context API
 
-    여기에 내용 입력합니다.
+- isuueList와 setIssueListData 를 context 객체에 관리하여, 전역에서 해당 값에 접근할 수 있도록 구현
+
+<br/>
+
+### 페이지
+
+1. 이슈 목록 화면
+
+- 이슈 목록 API 호출 후 렌더링
+  - api 호출시 쿼리를 붙여 “open 상태의 이슈” 중 “코멘트가 많은 순”으로 정렬된 데이터 호출함.
+- 인피니티 스크롤 ( 화면을 아래로 스크롤 할 시 이슈 목록 추가 로딩 )
+  - scroll 위치와 브라우저 크기를 계산하여 다음 데이터를 호출함.
+- 데이터 요청 중 로딩 표시 스피너
+
+<br/>
+
+2. 이슈 상세 화면
+
+- 마크다운 라이브러리를 통한 렌더링
+
+<br/>
+
+### 반응형
+
+- grid와 % , rem을 이용한 화면 비율에 맞는 크기 조절
 
   </details>
 
 <br>
-
-> ## 미구현 내용
-
-- 예시
 
 > ## Git
 
@@ -136,30 +155,14 @@ http://wanted610.s3-website.ap-northeast-2.amazonaws.com/
 
 > ## 회고
 
-### 윤관
-
--
-
-### 김한얼
-
--
-
-### 박진성
-
--
-
-### 신이재
-
--
-
 ### 전지현
 
--
+1.  api 명세서 충분한 숙지 부족<br/>
+    api 명세서를 잘 파악하지 못한 채 진행을 해서 나중에 코드를 많이 수정해야 했다.<br/>
+    앞으로는 사용하기 전에 어떤 api 요청을 할 수 있는지 등을 먼저 파악한 후 진행해야 할 것이다.
 
-### 정재욱
+    <br/>
 
--
-
-### 추승연
-
--
+2.  동료학습을 통한 사고 확장<br/>
+    무한스크롤 구현 방법이 내가 알고 있던 방법뿐 아니라 여러 방법이 있었다. <br/>
+    나의 사고에만 갇혀있지 않기 위해 코드를 공유하는 것에 대한 중요성을 느꼈다.
