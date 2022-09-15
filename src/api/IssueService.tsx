@@ -13,22 +13,25 @@ class IssueService {
     this.targetRepository = targetRepository;
   }
 
-  getAllIssues = (page: number) => {
-    const response = this.httpClient.get(
-      this.targetRepository + `/issues?per_page=20&page=${page}`
+  getAllIssues = async (targetRepository: string, page: number) => {
+    const response = await this.httpClient.get(
+      targetRepository + `/issues?per_page=20&page=${page}`
     );
+    if (response.status !== 200) throw Error(response.statusText);
     return response;
   };
 
-  getOpenIssues = (page: number) => {
-    const response = this.httpClient.get(
-      this.targetRepository + `/issues?sort=comments&state=open&per_page=20&page=${page}`
+  getOpenIssues = async (targetRepository: string, page: number) => {
+    const response = await this.httpClient.get(
+      targetRepository + `/issues?sort=comments&state=open&per_page=20&page=${page}`
     );
+    if (response.status !== 200) throw Error(response.statusText);
     return response;
   };
 
-  getIssueDetail = (number: number) => {
-    const response = this.httpClient.get(this.targetRepository + `/issues/${number}`);
+  getIssueDetail = async (targetRepository: string, number: number) => {
+    const response = await this.httpClient.get(targetRepository + `/issues/${number}`);
+    if (response.status !== 200) throw Error(response.statusText);
     return response;
   };
 }

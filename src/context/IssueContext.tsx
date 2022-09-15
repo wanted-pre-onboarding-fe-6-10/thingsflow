@@ -29,44 +29,23 @@ export const useIssue = () => {
 };
 
 export function IssueProvider({ issueService, children }: IssueProviderType) {
-  const [pageNumber, setPageNumber] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
+  const [targetRepository, setTargetRepository] = useState('angular/angular-cli');
 
-  const { issues, hasMore, loading, error } = useIssueSearch({
+  const { issues, hasMore, loading, error, lastIssueElementRef } = useIssueSearch({
     query: '',
-    pageNumber,
+    defaultPageNumber: 1,
     getOpenIssues: issueService.getOpenIssues,
+    targetRepo: targetRepository,
   });
-
-  const observer = useRef<any>();
-  const lastIssueElementRef = useCallback(
-    (node: any) => {
-      if (loading) return;
-      if (observer.current) observer.current.disconnect();
-      observer.current = new IntersectionObserver(entries => {
-        if (entries[0].isIntersecting && hasMore) {
-          setPageNumber(prev => prev + 1);
-        }
-      });
-      if (node) observer.current.observe(node);
-    },
-    [loading, hasMore]
-  );
 
   useEffect(() => {
     setIsLoading(loading);
   }, [loading]);
 
-  const setTargetRepository = (repository: string) => {
-    issueService.setTargetRepository(repository);
-  };
-
-  // const getNewIssues = useCallback(() => {
-  //   setPageNumber(1);
-  //   setIsLoading(true);
-  // }, [issueService]);
-
-  // useEffect(getNewIssues, [getNewIssues]);
+  useEffect(() => {
+    issueService.setTargetRepository(targetRepository);
+  }, [issueService, targetRepository]);
 
   const value: any = {
     targetRepository: issueService.targetRepository,

@@ -7,13 +7,9 @@ import Spinner from 'components/Spinner';
 import { IssueType } from 'src/types/IssueType';
 
 const IssueList = () => {
-  const { issues, isLoading, error, setTargetRepository, lastIssueElementRef } = useIssue();
+  const { issues, isLoading, error, lastIssueElementRef } = useIssue();
 
   const [focusedIssue, setFocusedIssue] = useState(-1);
-
-  useEffect(() => {
-    setTargetRepository('angular/angular-cli');
-  }, []);
 
   return (
     <Box>
