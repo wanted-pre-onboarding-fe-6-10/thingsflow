@@ -1,9 +1,9 @@
-import { getIssueDetail } from 'api/IssueService2';
+import { AxiosResponse } from 'axios';
+import { IssueContextType, useIssue } from 'context/IssueContext';
 import { useEffect, useState } from 'react';
 import { IssueType } from 'src/types/IssueType';
 import styled from 'styled-components';
 import { formatDate } from 'utils/dateFormat';
-import { markdownParser } from 'utils/markdownParser';
 import { parseMarkdown } from 'utils/parsemd';
 
 type DetailType = {
@@ -12,14 +12,10 @@ type DetailType = {
 
 const Detail = ({ issueNumber }: DetailType) => {
   const [issue, setIssue] = useState<IssueType>();
-
-  const fetchDetail = async () => {
-    const response = await getIssueDetail(issueNumber);
-    if (response) setIssue(response.data);
-  };
+  const { getIssueDetail } = useIssue();
 
   useEffect(() => {
-    fetchDetail();
+    getIssueDetail(issueNumber).then((res: AxiosResponse) => setIssue(res.data));
   }, [issueNumber]);
 
   return (
