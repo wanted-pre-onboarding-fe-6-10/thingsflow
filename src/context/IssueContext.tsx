@@ -61,13 +61,12 @@ export function IssueProvider({ issueService, children }: IssueProviderType) {
     issueService.setTargetRepository(repository);
   };
 
-  const getNewIssues = useCallback(() => {
-    // alert('NEW');
-    setPageNumber(1);
-    setIsLoading(true);
-  }, [issueService]);
+  // const getNewIssues = useCallback(() => {
+  //   setPageNumber(1);
+  //   setIsLoading(true);
+  // }, [issueService]);
 
-  useEffect(getNewIssues, [getNewIssues]);
+  // useEffect(getNewIssues, [getNewIssues]);
 
   const value: any = {
     targetRepository: issueService.targetRepository,
