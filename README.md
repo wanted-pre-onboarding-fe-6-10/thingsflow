@@ -100,8 +100,6 @@ http://wanted610.s3-website.ap-northeast-2.amazonaws.com/
 
 <br>
 
-<br>
-
   <details>
     <summary>3. 기타</summary>
 
