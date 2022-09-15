@@ -218,11 +218,12 @@ http://wanted610.s3-website.ap-northeast-2.amazonaws.com/
 
 ### 김한얼
 
--
+- Typescript와 ContextAPI를 연계해서 활용하는데 많은 에러와 시행착오를 겪었는데, 이를 통해 한층 더 Typescript에 대한 이해도를 많이 높일 수 있었다.
+- reducer를 통한 dispatch로 state 관리를 하려고 했는데 그 부분이 많이 어려워서 추가적인 학습을 진행할 예정이다.
 
 ### 박진성
 
--
+- Typescript를 처음 사용해봤는데 정말 러닝 커브가 높은 언어인 것 같다. 하지만, 타입지정을 통해 미리미리 디버깅을 할 수 있고 규모가 커질수록 활용도가 높을거란 기대가 된다.
 
 ### 신이재
 
