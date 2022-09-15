@@ -140,8 +140,7 @@ http://wanted610.s3-website.ap-northeast-2.amazonaws.com/
 
 > ## 기능별 설명 / Best Practice
 
-  <details>
-    <summary>1. Issue 목록</summary>
+### 1. Issue 목록
 
 - 이슈 목록 context API를 활용하여 불러오기
 - 이슈 목록은 open 상태, comment 많은 순으로 query param에 넣어 요청
@@ -156,18 +155,15 @@ http://wanted610.s3-website.ap-northeast-2.amazonaws.com/
 <img width="25%" alt="Screen Shot 2022-09-15 at 10 06 45 AM" src="https://user-images.githubusercontent.com/96093461/190289505-dc398514-257e-41aa-b26c-c095fb6da75a.png">
  <img width="70%" alt="Screen Shot 2022-09-15 at 10 03 03 AM" src="https://user-images.githubusercontent.com/96093461/190289113-75aad059-d7cf-4bf9-9355-0b21ca9fa10f.png">
 
-  </details>
-<details>
-    <summary>2. Issue 상세</summary>
+### 2. Issue 상세
     
 - 이슈 본문 markdown 형태를 정규식으로 parsing하여 컴포넌트에 innerHTML으로 넣어줌
   - 추후 HoC로 분리할 예정
 
   </details>
 
-<details>
-    <summary>3. 추가 기능</summary>
-    
+### 3. 추가 기능
+
 - Github API 호출 제한 초과 시 403 에러에 대한 alert 처리
 - 찾을 수 없는 레포지토리에 대한 404 에러에 대한 alert 처리
 - 레포지토리 경로 변경 기능 추가
