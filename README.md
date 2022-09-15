@@ -59,9 +59,10 @@ http://wanted610.s3-website.ap-northeast-2.amazonaws.com/
 > ## 기능별 설명 / Best Practice
 
   <details>
-    <summary>1. 예시</summary>
+    <summary>1. 이슈 목록 화면</summary>
 
-    여기에 내용 입력합니다.
+    1. API 호출
+     -
 
   </details>
 
