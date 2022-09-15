@@ -12,10 +12,10 @@ type DetailType = {
 
 const Detail = ({ issueNumber }: DetailType) => {
   const [issue, setIssue] = useState<IssueType>();
-  const { getIssueDetail } = useIssue();
+  const { getIssueDetail, targetRepository } = useIssue();
 
   useEffect(() => {
-    getIssueDetail(issueNumber).then((res: AxiosResponse) => setIssue(res.data));
+    getIssueDetail(targetRepository, issueNumber).then((res: AxiosResponse) => setIssue(res.data));
   }, [issueNumber]);
 
   return (

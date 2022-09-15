@@ -11,10 +11,10 @@ const Detail = () => {
   const [issue, setIssue] = useState<IssueType>();
   const { number } = useParams();
 
-  const { getIssueDetail } = useIssue();
+  const { getIssueDetail, targetRepository } = useIssue();
 
   useEffect(() => {
-    getIssueDetail(number).then((res: AxiosResponse) => setIssue(res.data));
+    getIssueDetail(targetRepository, number).then((res: AxiosResponse) => setIssue(res.data));
   }, [number]);
 
   return (
