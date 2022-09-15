@@ -222,7 +222,8 @@ http://wanted610.s3-website.ap-northeast-2.amazonaws.com/
 
 ### 윤관
 
--
+- Github Rest API를 활용해보면서 정말 다양한 기능들이 있고 API를 통해서 깃을 활용할 수 있다는 점을 알 수 있었다.
+- Issue List와 Detail 페이지를 구성하면서 검색기능이 있으면 좋지 않을까 해서 상태별 검색 기능을 추가했는데 추가적으로 Rest API Docs를 보면서 특정 사람의 repository를 검색해서 그 해당 repository의 이슈를 받아올 수 있는 기능이 있으면 이 서비스의 기능이 훨씬 더 사용자 친화적으로 개선될 것 같다는 생각을 했다. 여유가 된다면 이 기능은 추가해보고 싶다.
 
 ### 김한얼
 
