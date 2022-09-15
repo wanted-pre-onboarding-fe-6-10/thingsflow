@@ -6,7 +6,7 @@ class IssueService {
 
   constructor(httpClient: AxiosInstance) {
     this.httpClient = httpClient;
-    this.targetRepository = '';
+    this.targetRepository = 'angular/angular-cli';
   }
 
   setTargetRepository(targetRepository: string) {

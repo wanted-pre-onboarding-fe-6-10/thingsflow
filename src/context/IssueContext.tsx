@@ -2,27 +2,35 @@ import IssueService from 'api/IssueService';
 import useIssueSearch from 'hooks/useIssueSearch';
 import { useEffect, useRef } from 'react';
 import { createContext, useCallback, useContext, useState } from 'react';
+import { IssueType } from 'src/types/IssueType';
 
 type IssueProviderType = {
   issueService: IssueService;
   children: any;
 };
 
-// FIXME typescript 도입으로 인한 context default값 설정 문제
-export const IssueContext = createContext({
-  issues: [],
-  isLoading: false,
-  error: false,
-  setTargetRepository: (tt: any) => console.log(),
-  lastIssueElementRef: null,
-});
+export type IssueContextType = {
+  targetRepository: string;
+  issues: Array<IssueType>;
+  isLoading: boolean;
+  error: boolean;
+  setTargetRepository: any;
+  lastIssueElementRef: any;
+  getIssueDetail: any;
+};
 
-export const useIssue = () => useContext(IssueContext);
+// FIXME typescript 도입으로 인한 context default값 설정 문제
+export const IssueContext = createContext<IssueContextType | null>(null);
+
+export const useIssue = () => {
+  const context = useContext<IssueContextType | null>(IssueContext);
+  if (!context) throw new Error('No context');
+  return context;
+};
 
 export function IssueProvider({ issueService, children }: IssueProviderType) {
   const [pageNumber, setPageNumber] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
-  // const [focusedIssue, setFocusedIssue] = useState();
 
   const { issues, hasMore, loading, error } = useIssueSearch({
     query: '',
@@ -31,7 +39,6 @@ export function IssueProvider({ issueService, children }: IssueProviderType) {
   });
 
   const observer = useRef<any>();
-
   const lastIssueElementRef = useCallback(
     (node: any) => {
       if (loading) return;
@@ -47,24 +54,28 @@ export function IssueProvider({ issueService, children }: IssueProviderType) {
   );
 
   useEffect(() => {
-    // TODO Delete: 시연용
-    // setInterval(() => console.log('LOADING'), 10000);
-
     setIsLoading(loading);
   }, [loading]);
 
   const setTargetRepository = (repository: string) => {
     issueService.setTargetRepository(repository);
-    setPageNumber(1);
-    setIsLoading(true);
   };
 
+  // const getNewIssues = useCallback(() => {
+  //   setPageNumber(1);
+  //   setIsLoading(true);
+  // }, [issueService]);
+
+  // useEffect(getNewIssues, [getNewIssues]);
+
   const value: any = {
+    targetRepository: issueService.targetRepository,
     issues,
     isLoading,
     error,
     setTargetRepository,
     lastIssueElementRef,
+    getIssueDetail: issueService.getIssueDetail,
   };
 
   return <IssueContext.Provider value={value}>{children}</IssueContext.Provider>;

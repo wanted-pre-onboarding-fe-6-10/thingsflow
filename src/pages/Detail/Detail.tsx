@@ -1,28 +1,20 @@
-import { getIssueDetail } from 'api/IssueService2';
+import { AxiosResponse } from 'axios';
+import { useIssue } from 'context/IssueContext';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { IssueType } from 'src/types/IssueType';
 import styled from 'styled-components';
 import { formatDate } from 'utils/dateFormat';
-import { markdownParser } from 'utils/markdownParser';
 import { parseMarkdown } from 'utils/parsemd';
 
-type DetailType = {
-  issueNumber: number;
-};
-
-// const Detail = ({ issueNumber }: DetailType) => {
 const Detail = () => {
   const [issue, setIssue] = useState<IssueType>();
   const { number } = useParams();
 
-  const fetchDetail = async (issueNumber: number) => {
-    const response = await getIssueDetail(issueNumber);
-    if (response) setIssue(response.data);
-  };
+  const { getIssueDetail } = useIssue();
 
   useEffect(() => {
-    if (number) fetchDetail(parseInt(number));
+    getIssueDetail(number).then((res: AxiosResponse) => setIssue(res.data));
   }, [number]);
 
   return (
