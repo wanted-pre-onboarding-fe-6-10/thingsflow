@@ -106,7 +106,7 @@ http://wanted610.s3-website.ap-northeast-2.amazonaws.com/
 
   <details>
     <summary>1. Issue List </summary>
-    ![띵스플로우 이슈 리스트 및 광고](https://user-images.githubusercontent.com/79856086/190292543-4b70a35b-e7bf-4064-b257-b5ea4485b8da.PNG)
+    
 
     1. 이슈 목록 API 활용
       - Github Rest API를 활용해서 API 요청
@@ -130,10 +130,10 @@ http://wanted610.s3-website.ap-northeast-2.amazonaws.com/
     
 
   </details>
+  ![띵스플로우 이슈 리스트 및 광고](https://user-images.githubusercontent.com/79856086/190292543-4b70a35b-e7bf-4064-b257-b5ea4485b8da.PNG)
 
   <details>
     <summary>2. Issue Detail </summary>
-    ![띵스플로우 디테일](https://user-images.githubusercontent.com/79856086/190292592-39c184cf-9824-4140-af52-c8eac9ec22b5.PNG)
 
     1. 이슈의 상세 내용 표시
       - 이슈의 상세 내용 API 요청을 ContextAPI로 저장하여 state를 통한 관리(Issue List와 같은 메커니즘)
@@ -145,6 +145,7 @@ http://wanted610.s3-website.ap-northeast-2.amazonaws.com/
 
 
   </details>
+  ![띵스플로우 디테일](https://user-images.githubusercontent.com/79856086/190292592-39c184cf-9824-4140-af52-c8eac9ec22b5.PNG)
 
 <br/>
 
@@ -152,7 +153,6 @@ http://wanted610.s3-website.ap-northeast-2.amazonaws.com/
 
 <details>
     <summary>1. Issue search </summary>
-    ![이슈검색기능](https://user-images.githubusercontent.com/79856086/190292639-b9f9697e-e7a5-4be1-867a-a43a8c9424e0.PNG)
 
     1. 이슈 검색 기능 추가
       - state, sort, perPage, page 각 값을 query parameter로 API 요청을 보낼 수 있도록 API 요청 함수를 구현했고, 각 값들의 default 값을 주어 Github Rest API DefaultValue와 일치 시키도록 구현
@@ -162,6 +162,7 @@ http://wanted610.s3-website.ap-northeast-2.amazonaws.com/
 
 
   </details>
+  ![이슈검색기능](https://user-images.githubusercontent.com/79856086/190292639-b9f9697e-e7a5-4be1-867a-a43a8c9424e0.PNG)
 
 <br>
 
