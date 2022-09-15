@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 import IssueList from './IssueList/IssueList';
 import IssueRepo from './IssueRepo/IssueRepo';
+import IssueRepoInput from './IssueRepo/IssueRepoInput';
 
 const Issue = () => {
   return (
     <Container>
       <IssueRepo />
+      <IssueRepoInput />
       <IssueList />
     </Container>
   );
