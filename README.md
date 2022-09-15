@@ -59,9 +59,54 @@ http://wanted610.s3-website.ap-northeast-2.amazonaws.com/
 > ## 기능별 설명 / Best Practice
 
   <details>
-    <summary>1. 예시</summary>
+    <summary>1. 이슈 목록 화면</summary>
 
-    여기에 내용 입력합니다.
+    1. API 호출
+    - git hub 이슈 목록 가져오기 API 활용
+    - api 호출 시 parameter 값으로 sort=comments & state=open 전달하여 open 상태의 이슈 중 코멘트가 많은 순으로 정렬
+    - src/api 폴더 내 api.tsx -> axios instance 생성하여 모듈화 후 각 컴포넌트에서 api 호출 시 활용
+
+    2. Infinite scroll 구현
+    - IntersectionObserver API 활용하여 이슈 목록 화면 내의 무한 스크롤 동작 구현 : scroll event를 활용 대비 렌더링 최소화
+    - observer 생성 후 미리 지정한 observerRef element가 viwpoint에 들어오면 다음 페이지의 api data 호출
+    - 호출된 데이터들은 useState를 사용하여 저장
+
+    3. context api 활용한 api 연동
+    - Issue page 내 IssueProvider.tsx 컴포넌트에 context api 생성
+    - 생성된 context api를 통해 useState의 state와 setState를 전달
+    - useContext를 통해 Issue.tsx에서는 setState만 IssueBox.tsx에서는 state만 호출하여 기능 구현
+
+    4. 광고 이미지 출력
+    - useContext를 통해 불러온 배열을 map method를 활용하여 구현
+    - map method의 두번째 parameter로 index값을 지정하고 index값이 4일 때 issueBox 위에 이미지 추가
+    - 이미지 클릭시 띵스플로우 홈페이지로 이동
+
+  </details>
+
+<br>
+
+  <details>
+    <summary>2. 이슈 상세 화면</summary>
+
+    1. 이슈 상세 화면 이동
+    - 이슈 목록 화면에서 이슈 클릭 시 해당 이슈의 number 값을 Param으로 전달
+    - 해당 number 값을 useParam으로 전달받아 상세 이슈 api 재호출
+
+    2. 본문 표시 위해
+    - markdown 라이브러리 사용하여 본문 내용 표시
+    - github-markdown-css 사용하여 스타일링
+
+  </details>
+
+<br>
+
+  <details>
+    <summary>3. 기타</summary>
+
+    1. 반응형 UI 적용
+    - styled component에서 스크린 값에 따른 UI 변경 구현
+
+    2. converDate 함수 모듈화 통해 이슈 작성일 변환
 
   </details>
 
@@ -156,4 +201,5 @@ http://wanted610.s3-website.ap-northeast-2.amazonaws.com/
 
 ### 추승연
 
--
+- 타입스크립트를 학습하고 처음 진행하는 프로젝트라 타입 관련하여 이슈가 많았다. 동일한 프로젝트를 자바스크립트로 진행했다면 작업 시간은 더 빨랐겠지만 학습이라는 의미에서 이번 프로젝트를 통해 습득한게 많은 것 같다.
+- context API의 경우 활용에 익숙해지면 다음 프로젝트 진행에 많은 도움이 될 것 같다.

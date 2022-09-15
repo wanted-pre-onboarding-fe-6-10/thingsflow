@@ -5,7 +5,7 @@ import { IssueType } from 'src/type/type';
 import ReactMarkdown from 'react-markdown';
 import styled from 'styled-components';
 import dateConvert from 'utils/convertStringTodate';
-import 'github-markdown-css';
+import '../../../node_modules/github-markdown-css/github-markdown-light.css';
 import { loadingImg } from 'pages/Issue/IssueProvider';
 
 const Detail = () => {
@@ -44,14 +44,16 @@ const Detail = () => {
                 </TitleBox>
                 <SubInfo>
                   <InfoText>작성자: {issueDetail?.user.login} </InfoText>
-                  <>작성일: {dateConvert(issueDetail?.created_at as Date)}</>
+                  <InfoText>작성일: {dateConvert(issueDetail?.created_at as Date)}</InfoText>
                 </SubInfo>
               </Wrapper>
               <Comments>코멘트 {issueDetail?.comments}</Comments>
             </IssueInfo>
           </Box>
           <MainBox>
-            <ReactMarkdown className="markdown-body">{issueDetail?.body as string}</ReactMarkdown>
+            <ReactMarkdown className="markdown-body light scheme">
+              {issueDetail?.body as string}
+            </ReactMarkdown>
           </MainBox>
         </>
       )}
@@ -102,7 +104,7 @@ const Wrapper = styled.div`
 `;
 const TitleBox = styled.p`
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 1.5rem;
 `;
 const Title = styled.span`
   margin-right: 1rem;
@@ -111,12 +113,17 @@ const InfoText = styled.span`
   margin-right: 1rem;
 `;
 const SubInfo = styled.p`
-  font-size: 0.8rem;
+  font-size: 1rem;
+  color: #9e9e9e;
+  @media screen and (max-width: 950px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 const Comments = styled.p`
   width: 10%;
-  margin: 0 2rem;
+  margin: 1rem 2rem;
   @media screen and (max-width: 950px) {
     text-align: center;
     width: 50%;
