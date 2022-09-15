@@ -106,6 +106,7 @@ http://wanted610.s3-website.ap-northeast-2.amazonaws.com/
 
   <details>
     <summary>1. Issue List </summary>
+    ![띵스플로우 이슈 리스트 및 광고](https://user-images.githubusercontent.com/79856086/190292543-4b70a35b-e7bf-4064-b257-b5ea4485b8da.PNG)
 
     1. 이슈 목록 API 활용
       - Github Rest API를 활용해서 API 요청
@@ -126,12 +127,13 @@ http://wanted610.s3-website.ap-northeast-2.amazonaws.com/
     5. 화면 아래로 스크롤 할 시 목록 추가 로딩(인피니티 스크롤)
       - IntersectionObserver을 활용해서 특정 태그에 도달하게 되면 그 부분을 인식해 page 값을 이전 값 보다 +1 해주고 그에 맞는 페이지를 API 요청하여 받아온 다음 지금까지 랜더링된 값들의 뒤에 스프레드 연산자로 추가해주어서 인피니티 스크롤 구현.
       - 데이터 API 요청간 로딩 표시를 spinner로 표현(components/spinner.tsx)
-    ![띵스플로우 이슈 리스트 및 광고](https://user-images.githubusercontent.com/79856086/190292543-4b70a35b-e7bf-4064-b257-b5ea4485b8da.PNG)
+    
 
   </details>
 
   <details>
     <summary>2. Issue Detail </summary>
+    ![띵스플로우 디테일](https://user-images.githubusercontent.com/79856086/190292592-39c184cf-9824-4140-af52-c8eac9ec22b5.PNG)
 
     1. 이슈의 상세 내용 표시
       - 이슈의 상세 내용 API 요청을 ContextAPI로 저장하여 state를 통한 관리(Issue List와 같은 메커니즘)
@@ -139,7 +141,7 @@ http://wanted610.s3-website.ap-northeast-2.amazonaws.com/
     2. ‘이슈번호, 이슈제목, 작성자, 작성일, 코멘트 수, 작성자 프로필 이미지, 본문' 표시
       - Issue List에서 보여주던 카드 형식을 같이 활용하여 윗부분에 이슈번호, 이슈제목, 작성자, 작성일, 코멘트 수를 표시하고 아래에 따로 분리해서 본문 내용이 보이도록 구현
       - 본문 내용의 경우 Markdown 형태라 react-Markdown 라이브러리와 gitgub-markdown-css 라이브러리를 활용해서 UI 개선
-    ![띵스플로우 디테일](https://user-images.githubusercontent.com/79856086/190292592-39c184cf-9824-4140-af52-c8eac9ec22b5.PNG)
+    
 
 
   </details>
@@ -150,12 +152,13 @@ http://wanted610.s3-website.ap-northeast-2.amazonaws.com/
 
 <details>
     <summary>1. Issue search </summary>
+    ![이슈검색기능](https://user-images.githubusercontent.com/79856086/190292639-b9f9697e-e7a5-4be1-867a-a43a8c9424e0.PNG)
 
     1. 이슈 검색 기능 추가
       - state, sort, perPage, page 각 값을 query parameter로 API 요청을 보낼 수 있도록 API 요청 함수를 구현했고, 각 값들의 default 값을 주어 Github Rest API DefaultValue와 일치 시키도록 구현
       - Select로 state, sort를 선택하고 page 값들은 입력할 수 있도록 구현
       - 검색 시 랜더링을 새로하여 원하는 데이터들이 나올 수 있도록 하고 Infinite scroll도 정상 작동하도록 구현
-      ![이슈검색기능](https://user-images.githubusercontent.com/79856086/190292639-b9f9697e-e7a5-4be1-867a-a43a8c9424e0.PNG)
+      
 
 
   </details>
