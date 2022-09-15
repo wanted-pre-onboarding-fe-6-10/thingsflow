@@ -1,6 +1,6 @@
 import ReactMarkdown from 'react-markdown';
 import styled from 'styled-components';
-import remarkGfm from 'remark-gfm';
+import '../../../node_modules/github-markdown-css/github-markdown.css';
 
 type Markdown = {
   markdown: string | undefined;
@@ -9,7 +9,7 @@ type Markdown = {
 const MarkdownRender = ({ markdown }: Markdown) => {
   return (
     <Container>
-      {markdown && <ReactMarkdown remarkPlugins={[remarkGfm]}>{markdown}</ReactMarkdown>}
+      {markdown && <ReactMarkdown className="markdown-body">{markdown}</ReactMarkdown>}
     </Container>
   );
 };

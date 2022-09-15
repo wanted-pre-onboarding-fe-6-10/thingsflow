@@ -59,10 +59,30 @@ http://wanted610.s3-website.ap-northeast-2.amazonaws.com/
 > ## 기능별 설명 / Best Practice
 
   <details>
-    <summary>1. 예시</summary>
-
-    여기에 내용 입력합니다.
-
+    <summary>1.Context API</summary>
+      <br>
+    useContext를 사용하는 Custom Hook을 만들어서 컴포넌트에서 useContext을 직접 사용하는 대신  커스텀 훅을 사용해서 state와 dispatch 사용 
+  </details>
+      <br>
+    <details>
+    <summary>2. Infinite Scroll</summary>
+          <br>
+      - 현재의 높이값과 화면의 전체 높이값을 비교하여 page의 값을 +1 <br>
+      - page값이 변함에 따라서 api 호출 시 파라미터로 넘겨 다른 페이지의 값을 받아와서 렌더링
+  </details>
+        <br>
+    <details>
+    <summary>3. 다섯번째 셀에 광고 이미지 출력</summary>
+          <br>
+     - map의 index을 활용하여 5번째 리스트에 광고 이미지 삽입 <br>
+      - _blank 속성을 활용하여 새 창으로 링크 이동
+  </details>
+        <br>
+    <details>
+    <summary>4. 이슈 상세 화면 본문 마크다운 변환</summary>
+          <br>
+      - react-markdown 라이브러리를 사용해서 1차로 마크다운을 변환 <br>
+      - github-markdown-css 라이브러리를 사용해서 코드블럭, 인라인, 이모지 등 추가 된 마크다운 언어 변환
   </details>
 
 <br>
@@ -152,7 +172,8 @@ http://wanted610.s3-website.ap-northeast-2.amazonaws.com/
 
 ### 정재욱
 
--
+- 타입스크립트를 사용하면서 기존의 자바스크립트로 진행했던 것보다 고려해야 할 사항이 많아서 시간이 오래 걸렸음
+- 직접 프로젝트에 적용해 보니 타입스크립트에 대해서 더 자세히 알게 되었다.
 
 ### 추승연
 
