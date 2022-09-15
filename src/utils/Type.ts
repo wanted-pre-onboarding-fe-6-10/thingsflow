@@ -60,4 +60,5 @@ export interface SelectProps {
   title: string;
   onSelect: (e: SelectChangeEvent<string | any>) => void;
   content: string[];
+  value: string;
 }

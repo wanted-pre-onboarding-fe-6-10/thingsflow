@@ -1,6 +1,5 @@
 import { useIssuesListDispatch, useIssuesListState } from 'pages/IssuesContext';
 import { useCallback, useEffect, useRef, useState } from 'react';
-
 import { getIssue } from 'api/getIssue';
 import styled from 'styled-components';
 import IssueList from './IssueList/IssueList';
@@ -17,7 +16,19 @@ const Issue = () => {
   const [perPage, setPerPage] = useState(30);
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
-  // dropdown으로 선택할 수 있는 기능 추가해보자
+
+  const selectSort = (e: SelectChangeEvent) => {
+    e.preventDefault();
+    setSort(e.target.value);
+  };
+  const selectState = (e: SelectChangeEvent) => {
+    e.preventDefault();
+    setIssueState(e.target.value);
+  };
+  const onSearch = () => {
+    dispatch({ type: 'GET_ISSUE_SUCCESS', data: [] });
+  };
+
   const getIssueList = async () => {
     dispatch({ type: 'GET_ISSUE' });
     try {
@@ -28,6 +39,9 @@ const Issue = () => {
       dispatch({ type: 'GET_ISSUE_ERROR' });
     }
   };
+  useEffect(() => {
+    getIssueList();
+  }, [page]);
 
   const handleObserver = useCallback(
     (entries: IntersectionObserverEntry[]) => {
@@ -38,22 +52,6 @@ const Issue = () => {
     },
     [state]
   );
-  const selectSort = (e: SelectChangeEvent) => {
-    e.preventDefault();
-    setSort(e.target.value);
-  };
-
-  const selectState = (e: SelectChangeEvent) => {
-    e.preventDefault();
-    setIssueState(e.target.value);
-  };
-  const onSearch = () => {
-    dispatch({ type: 'GET_ISSUE_SUCCESS', data: [] });
-  };
-  useEffect(() => {
-    getIssueList();
-  }, [page]);
-
   useEffect(() => {
     const option = { root: null, rootMargin: '20px', threshold: 0.5 };
     const observer = new IntersectionObserver(handleObserver, option);
@@ -68,15 +66,17 @@ const Issue = () => {
         </SpinnerBox>
       ) : (
         <>
-          <Title>Angular Issue List</Title>
+          <Title>Angular/Angular-cli</Title>
           <SelectBox>
             <SelectMenu
               title={'sort'}
               onSelect={selectSort}
+              value={sort}
               content={['created', 'updated', 'comments']}
             />
             <SelectMenu
               title={'state'}
+              value={issueState}
               onSelect={selectState}
               content={['open', 'closed', 'all']}
             />
@@ -86,10 +86,11 @@ const Issue = () => {
               type="number"
               value={perPage}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setPerPage(parseInt(e.target.value))
+                setPerPage(Math.abs(parseInt(e.target.value)))
               }
               InputLabelProps={{
                 shrink: true,
+                inputMode: 'numeric',
               }}
             />
             <TextField
@@ -98,10 +99,11 @@ const Issue = () => {
               type="number"
               value={page}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setPage(parseInt(e.target.value))
+                setPage(Math.abs(parseInt(e.target.value)))
               }
               InputLabelProps={{
                 shrink: true,
+                inputMode: 'numeric',
               }}
             />
             <IssueBtn variant="contained" onClick={onSearch}>
@@ -116,7 +118,7 @@ const Issue = () => {
         </>
       )}
       {!state.isLoading && <LoaderBox ref={loader}></LoaderBox>}
-      {!isLoading && state.isLoading && (
+      {state.isLoading && (
         <SpinnerBox>
           <Spinner />
         </SpinnerBox>
@@ -132,7 +134,8 @@ export const Container = styled.div`
   align-items: center;
 `;
 export const SpinnerBox = styled.div`
-  position: absolute;
+  position: sticky;
+  display: inline-block;
   top: 50%;
   left: 50%;
 `;
@@ -148,8 +151,9 @@ const IssueBox = styled.div`
 `;
 const IssueBtn = styled(Button)`
   height: 3rem;
+  width: 6rem;
 `;
-const LoaderBox = styled.div``;
+export const LoaderBox = styled.div``;
 const Title = styled.div`
   font-size: 2rem;
   font-weight: bold;

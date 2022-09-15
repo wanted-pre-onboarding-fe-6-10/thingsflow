@@ -17,7 +17,7 @@ const IssueCard = ({ props }: ContentProps) => {
       </ListImgWrapper>
       <ListItem>
         <ListTitleWrapper>
-          <ListNumber>#{props.number}</ListNumber>
+          <ListNumber>[#{props.number}]</ListNumber>
           <ListTitle>{props.title}</ListTitle>
           <ListID>{props.user.login}</ListID>
         </ListTitleWrapper>

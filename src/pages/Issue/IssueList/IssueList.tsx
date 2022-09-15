@@ -11,7 +11,7 @@ const IssueList = ({ index, issue }: IssueProps) => {
         <AdvertisingBox>
           <AdvertisingImg
             src={`${process.env.PUBLIC_URL}/thingsflow.png`}
-            onClick={() => (window.location.href = 'https://thingsflow.com/ko/home')}
+            onClick={() => window.open('https://thingsflow.com/ko/home')}
           />
         </AdvertisingBox>
       )}
