@@ -26,6 +26,10 @@ const Issue = () => {
       setTimeout(() => {
         setIsLoading(false);
 
+        // [리팩토링] pageNum이 1일때만 광고 데이터를 넣어줘야 함.
+        // 근데 그걸 위해 pageNum을 활용했는데, 그러기보단 true,false를 값으로 가지는 변수를 하나 만들어 flag 처리하는게 좋음
+        // 왜냐면, pageNum은 계속 연산되는건데 , 여기서 이렇게 활용되면 뭔가 연산하는건가? 생각되고
+        // 별도의 변수를 flag로 사용하면 이 코드의 의미가 명확해지기 때문에
         if (pageNum === 1) {
           const ad = { type: 'ad', id: Date.now() };
           response.data.splice(4, 0, ad);

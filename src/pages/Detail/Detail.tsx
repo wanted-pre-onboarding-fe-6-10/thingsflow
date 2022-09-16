@@ -11,7 +11,22 @@ const Detail = () => {
 
   const { number } = useParams();
 
+  /*
+  [리팩토링]
+   async-await를 불필요하게 썻음
+   : 어싱크를 쓰는 이유는 뒤에 어떤 처리가 있는데 일단 실행되지 않고 기다리게 하려고 쓰는건데
+   여긴 그냥 reponse받고 끝임.
+   따라서 그냥 .then한번만 쓰는 코드로 되는거라면 굳이 어씽크 안써도 되는것임!!
+
+   : then으로 하면 useEffect 안에서 바로 처리가 되는데, 굳이 어렵게 됨.
+  */
+
+  /*
+ 어씽크는 가급적 쓰지 말고,then으로 웬만하면 쓰기!! ⭐️
+ */
+
   const getRequest = async () => {
+    // [리팩토링]
     const response = await getIssueItem(number);
 
     if (response.status === 200) {
